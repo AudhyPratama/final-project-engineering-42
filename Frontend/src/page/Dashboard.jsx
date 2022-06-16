@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
+import axios from "axios";
 
 import Navbar from "../components/Navbar";
 // import Profile from "../page/Profile";
@@ -12,7 +13,6 @@ import "../asset/css/Dashboard.css";
 function DashboardUi () {
     return (
         <div className="Dashboard">
-            {/* <h1>Dashboard</h1> */}
             <Navbar />
             {/* <Route exact path="/" component={home}></Route>
             <Route exact path="/keranjang" component={Keranjang}></Route>
@@ -22,63 +22,73 @@ function DashboardUi () {
                 <div className="display">
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="/biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="biology-book">
                                 <img src={biologyBook} alt="biology book" width={250} height={250}/>
-                                <p>buku biologi</p>
+                                <h3>Buku Biologi</h3>
+                                <h4>Rp.50,000</h4>
                             </a>
                         </li>
                     </ul>

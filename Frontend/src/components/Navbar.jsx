@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import cartIcon from "../asset/icons/shopping-cart-2-128p.png";
 import userIcon from "../asset/icons/user.png";
-import searchIcon from '../asset/icons/Search-Icon.png';
+import searchIcon from '../asset/icons/search-white.png';
 
 import '../asset/css/Navbar.css';
 
@@ -15,7 +15,7 @@ function Navbar () {
                 <ul>
                     <li>
                         {/* <Link to= "/"><h1 className="title-1">Pes<span>Buk</span></h1></Link> */}
-                        <a href="/home"><h2>Pes<span>Buk</span></h2></a>
+                        <a className="App-logo" href="/home"><h2>Pes<span>Buk</span></h2></a>
                     </li>
                     
                     <li className="search-box"> 
@@ -28,7 +28,7 @@ function Navbar () {
                     
                     <li>
                         {/* <Link to="/keranjang">Keranjang</Link> */}
-                        <a href="#"><img className="cart-icon" src={cartIcon} alt="cart icon" width={50} height={50}></img></a>
+                        <a href="/keranjang"><img className="cart-icon" src={cartIcon} alt="cart icon" width={50} height={50}></img></a>
                     </li>
 
                     <li>
@@ -37,7 +37,7 @@ function Navbar () {
 
                     <li>
                         {/* <Link to="/profil">Profile</Link> */}
-                        <a href="#"><img className="user-icon" src={userIcon} alt="user icon" width={50} height={50}></img></a>
+                        <a href="/profil"><img className="user-icon" src={userIcon} alt="user icon" width={65} height={65}></img></a>
                     </li>
                 </ul>
             </div>

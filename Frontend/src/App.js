@@ -3,7 +3,7 @@ import React from 'react';
 import "./App.css";
 
 import DashboardUi from './page/Dashboard';
-// import LoginUi from "./page/Login";
+import LoginUi from "./page/Login";
 
 
 
