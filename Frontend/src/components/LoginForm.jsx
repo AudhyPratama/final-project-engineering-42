@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
+
+import ForgotPassword from "./ForgotPassword";
+import SignupForm from "./SignupForm";
 
 import userIcon from "../asset/icons/user.png";
 import emailIcon from "../asset/icons/email.png";
@@ -23,18 +26,23 @@ function LoginFormComponent () {
                     <div>
                         <h2>Sign in page</h2>
                         <div>
+                            <h3>Username</h3>
                             <img src={emailIcon} alt="email" className="email"/>
                             <input type="text" placeholder="loremipsum@gmail.com" className="name"/>
                         </div>
                         <div className="second-input">
+                            <h3>Password</h3>
                             <img src={lockIcon} alt="pass" className="email"/>
                             <input type="password" placeholder="password" className="name"/>
                         </div>
                         <div className="login-button">
-                            <button type="submit" ><a href="#"></a></button>
+                            <button type="submit" >Login</button>
                         </div>      
                         <div className="link">
                             <a href="#">Forgot password ?</a> Or <a href="#">Sign Up</a>
+                            {/* <Router exact path="/forgot-password" component={ForgotPassword}/>
+                            <Router exact path="/sign-up" component={SignupForm}/> */}
+                            
                         </div>
                     </div>
                 </div>

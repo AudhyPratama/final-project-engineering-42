@@ -1,8 +1,6 @@
-// import familyBg from "../asset/img/Bg/family-bg.jpg";
-
 import LoginFormComponent from "../components/LoginForm";
 
-import '../asset/css/Login.css';
+import "../asset/css/Login.css";
 
 function LoginUi () {
     return (
