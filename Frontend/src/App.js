@@ -1,8 +1,18 @@
-import './App.css';
-import LoginUi from './page/Login';
+import React from 'react';
+
+import "./App.css";
+
+// import DashboardUi from './page/Dashboard';
+import LoginUi from "./page/Login";
+
+
+
 function App() {
   return (
-    <LoginUi />
+    <div className='App'>
+      <LoginUi />
+      {/* <DashboardUi /> */}
+    </div> 
   );
 }
 

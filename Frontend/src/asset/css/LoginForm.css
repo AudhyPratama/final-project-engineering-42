@@ -16,12 +16,12 @@ background: linear-gradient(90deg, rgba(69,255,222,0) 0%, rgba(69,255,222,0.15) 
     height: 550px;
     width: 35%;
     box-shadow: 0px 0px 15px 12px rgba(0, 0, 0, 40%);
-    padding: 30px 0;
+    padding: 50px 0;
     border-radius: 15px; 
     background-color: white;
 }
 
-h1, h2 {
+h1, h2, h3 {
     font-family: 'Mulish', Arial, Helvetica, sans-serif;
     font-size: 700;
 }
@@ -37,6 +37,13 @@ h1 img {
 
 h2 {
     font-size: 30px;
+}
+
+h3 {
+    margin: 0px;
+    padding: 5px 0;
+    font-size: 25px;
+    font-size: medium;
 }
 
 .imgs {
