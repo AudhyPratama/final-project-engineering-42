@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
-import Profile from "../page/Profile";
-import Keranjang from "../page/Keranjang";
+// import Profile from "../page/Profile";
+// import Keranjang from "../page/Keranjang";
 
 import biologyBook from "../asset/img/Item/Biology.jpeg";
 
