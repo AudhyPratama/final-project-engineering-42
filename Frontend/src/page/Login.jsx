@@ -9,7 +9,6 @@ function LoginUi () {
             <LoginFormComponent />
         </div>
     );
-    
 }
 
 export default LoginUi;
