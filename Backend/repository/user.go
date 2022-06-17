@@ -3,7 +3,6 @@ package repository
 import (
 	"database/sql"
 	"errors"
-	//"github.com/rg-km/final-project-engineering-68/api"
 )
 
 type UserRepository struct {
