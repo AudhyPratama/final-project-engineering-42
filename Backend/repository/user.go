@@ -36,6 +36,24 @@ func (u *UserRepository) FetchUsers() ([]User, error) {
 	return users, nil
 }
 
+func (u *UserRepository) FetchUsersByEmail(email string) (string, error) {
+	var user User
+
+	err := u.db.QueryRow(`SELECT email FROM users WHERE email = ?`, email).Scan(&user.Email)
+	if err != nil {
+		return "", errors.New("Email not found")
+	}
+	return user.Email, nil
+}
+
+func (u *UserRepository) Signup(name string, email string, password string, role string) error {
+	_, err := u.db.Exec(`INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)`, name, email, password, role)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (u *UserRepository) Login(email string, password string) (*string, error) {
 	var user User
 

@@ -9,8 +9,11 @@ import (
 )
 
 type User struct {
+	ID       int64  `json:"id"`
+	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	Role     string `json:"role"`
 }
 
 type LoginSuccessResponse struct {
@@ -27,6 +30,37 @@ type Claims struct {
 	Email string
 	Role  string
 	jwt.StandardClaims
+}
+
+func (api *API) signup(w http.ResponseWriter, req *http.Request) {
+	api.AllowOrigin(w, req)
+	var user User
+	err := json.NewDecoder(req.Body).Decode(&user)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	res, _ := api.userRepo.FetchUsersByEmail(user.Email)
+	if len(res) > 0 {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Email already exists"))
+		return
+	} else if user.Email == "" || user.Password == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Email or Password is empty"))
+		return
+	} else {
+		err := api.userRepo.Signup(user.Name, user.Email, user.Password, user.Role)
+		if err != nil {
+			w.Write([]byte("Error signing up"))
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("Signup success"))
+	}
+
 }
 
 func (api *API) login(w http.ResponseWriter, req *http.Request) {
