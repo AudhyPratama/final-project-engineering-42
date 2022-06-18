@@ -19,7 +19,7 @@ func NewAPI(userRepo repository.UserRepository) API {
 
 	mux.Handle("/api/user/login", api.POST(http.HandlerFunc(api.login)))
 	mux.Handle("/api/user/logout", api.POST(http.HandlerFunc(api.logout)))
-	mux.Handle("api/signup", api.POST(http.HandlerFunc(api.signup)))
+	mux.Handle("/api/signup", api.POST(http.HandlerFunc(api.signup)))
 
 	return api
 }
