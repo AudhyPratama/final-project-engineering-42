@@ -1,2 +1,0 @@
-Ini lokasi file untuk backend
-hapus file ini jika tidak digunakan!
