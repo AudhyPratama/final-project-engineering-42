@@ -2,11 +2,11 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import cartIcon from "../asset/icons/shopping-cart-2-128p.png";
-import userIcon from "../asset/icons/user.png";
-import searchIcon from '../asset/icons/search-white.png';
+import cartIcon from "../../../asset/icons/shopping-cart-2-128p.png";
+import userIcon from "../../../asset/icons/user.png";
+import searchIcon from '../../../asset/icons/search-white.png';
 
-import '../asset/css/Navbar.css';
+import '../component/Navbar.css';
 
 function Navbar () {
     return (

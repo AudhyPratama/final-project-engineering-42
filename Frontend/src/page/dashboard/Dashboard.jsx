@@ -2,13 +2,13 @@ import React from "react";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
 
-import Navbar from "../components/Navbar";
-// import Profile from "../page/Profile";
-// import Keranjang from "../page/Keranjang";
+import Navbar from "../dashboard/component/Navbar";
+// import Keranjang from "../keranjang/Keranjang";
+// import Profile from "../profile/Profile";
 
-import biologyBook from "../asset/img/Item/Biology.jpeg";
+import biologyBook from "../../asset/img/Item/Biology.jpeg";
 
-import "../asset/css/Dashboard.css";
+import "./Dashboard.css";
 
 function DashboardUi () {
     return (
