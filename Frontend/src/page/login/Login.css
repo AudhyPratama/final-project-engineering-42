@@ -7,7 +7,7 @@ background: linear-gradient(90deg, rgba(69,255,222,0) 0%, rgba(69,255,222,1) 75%
 }
 
 /* Pes */
-.title-1 {
+.App-title-1 {
     font-family: 'Mulish', Arial, Helvetica, sans-serif;
     font-size: 90px;
     font-weight: 700;
@@ -18,7 +18,7 @@ background: linear-gradient(90deg, rgba(69,255,222,0) 0%, rgba(69,255,222,1) 75%
 }
 
 /* Buk */
-.title-1 span{
+.App-title-1 span{
     color: blue;
     stroke: 2px solid rgba(255, 255, 255, 100%);
 }
