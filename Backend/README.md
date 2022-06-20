@@ -18,54 +18,37 @@
 
 # Register
 
-* `POST : http://localhost:8080/api/signup`
+* ![Capture1](https://user-images.githubusercontent.com/100668235/174640317-fb4d911f-38fa-408d-98ff-d183b99f3ac6.PNG)
+
 
 + request Body
 
-`{`
+* ![Capture2](https://user-images.githubusercontent.com/100668235/174641111-a54cabaf-4df2-412f-9cf4-3011c1c000c4.PNG)
 
-*  `"name": "Dito",`
-*  `"email": "dito@gmail.com",`
-*  `"password": "dito7654",`
-*  `"role": "user"`
 
-`}`
++ response 
 
-+ response `Status:200 OK`
-
-`{`
-
-*  `Account registered successfully`
-
-`}`
-
+* ![Capture3](https://user-images.githubusercontent.com/100668235/174641228-730691c4-b790-48bf-b87d-575a9c969ff2.PNG)
 
 
 # Login
 
-* `POST : http://localhost:8080/api/user/login`
+* ![Capture4](https://user-images.githubusercontent.com/100668235/174641727-f9174f8a-c1d6-4158-9241-8864f58a5ac5.PNG)
+
 
 + request Body
 
-`{`
+* ![Capture5](https://user-images.githubusercontent.com/100668235/174641853-347cf19c-ddc4-4434-99b2-0db4399ba8d0.PNG)
 
-*   `"email": "dito@gmail.com",`
-*   `"password": "dito7654"`
- 
-`}`
 
-+ response `Status:200 OK`
++ response 
 
-`{`
+* ![Capture6](https://user-images.githubusercontent.com/100668235/174642004-1d404703-d9c3-41e8-9220-668b4884fc25.PNG)
 
-*   `"email": "dito@gmail.com",`
-*   `"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImRpdG9AZ21haWwuY29tIiwiUm9sZSI6InVzZXIiLCJleHAiOjE2NTU3MTc5NTF9.xr7gSxZiHzytazAUbQw7XKDaC5Z34kPMPGEr9TAvHtU"`
- 
-`}`
 
 # List Products / List Book
 
-* ![path](https://user-images.githubusercontent.com/100668235/174638909-2aad9d16-3da8-4218-ae9c-981e91b92cda.PNG)
+![path](https://user-images.githubusercontent.com/100668235/174638909-2aad9d16-3da8-4218-ae9c-981e91b92cda.PNG)
 
-* Reponse
+
 ![response](https://user-images.githubusercontent.com/100668235/174639074-9c4b17ce-4498-44c2-ae60-6a4e0cad4cd3.PNG)
