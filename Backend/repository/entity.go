@@ -11,6 +11,7 @@ type User struct {
 
 type Book struct {
 	ID          int64   `db:"id"`
+	UserID      int64   `db:"user_id"`
 	CategoryID  int64   `db:"category_id"`
 	Title       string  `db:"title"`
 	Penulis     string  `db:"penulis"`
@@ -34,4 +35,15 @@ type DetailBook struct {
 type Categori struct {
 	ID   int64  `db:"id"`
 	Name string `db:"name"`
+}
+
+type ItemCart struct {
+	ID           int64   `db:"id"`
+	UserID       int64   `db:"user_id"`
+	BookID       int64   `db:"book_id"`
+	Title        string  `db:"title"`
+	CategoryName string  `db:"category_name"`
+	Penulis      string  `db:"penulis"`
+	Quantity     int64   `db:"quantity"`
+	Price        float64 `db:"price"`
 }

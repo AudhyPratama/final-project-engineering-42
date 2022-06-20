@@ -22,7 +22,7 @@ func NewAPI(userRepo repository.UserRepository, productRepo repository.ProductRe
 	mux.Handle("/api/user/logout", api.POST(http.HandlerFunc(api.logout)))
 	mux.Handle("/api/signup", api.POST(http.HandlerFunc(api.signup)))
 
-	mux.Handle("/api/products", api.GET(http.HandlerFunc(api.signup)))
+	mux.Handle("/api/products", api.GET(http.HandlerFunc(api.productList)))
 
 	return api
 }

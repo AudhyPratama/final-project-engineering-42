@@ -10,10 +10,9 @@ type ProductListErrorResponse struct {
 }
 
 type Product struct {
-	Name     string  `json:"name"`
-	Category int64   `json:"category"`
-	Price    float64 `json:"price"`
-	Stock    int64   `json:"stock"`
+	Name    string  `json:"name"`
+	Penulis string  `json:"penulis"`
+	Price   float64 `json:"price"`
 }
 
 type ProductListSuccessResponse struct {
@@ -27,11 +26,11 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 	response := ProductListSuccessResponse{}
 	response.Products = make([]Product, 0)
 
-	products, err := api.productRepo.GetAll()
+	products, err := api.productRepo.FetchProducts()
 	defer func() {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			encoder.Encode(ProductListErrorResponse{err.Error()})
+			encoder.Encode(ProductListErrorResponse{Error: err.Error()})
 			return
 		}
 	}()
@@ -41,10 +40,9 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 
 	for _, product := range products {
 		response.Products = append(response.Products, Product{
-			Name:     product.Title,
-			Category: product.CategoryID,
-			Price:    product.Price,
-			Stock:    product.Stock,
+			Name:    product.Title,
+			Penulis: product.Penulis,
+			Price:   product.Price,
 		})
 	}
 

@@ -4,6 +4,7 @@
 * `POST` : `/api/signup`
 * `POST` : `/api/user/login`
 * `POST` : `/api/user/logout`
+* `GET`  : `/api/products`
 
 # How to run Service
 * Database : Masuk ke directory `Backend`, lalu run `go run db\main.go`, untuk running database SQLite
@@ -61,3 +62,10 @@
 *   `"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImRpdG9AZ21haWwuY29tIiwiUm9sZSI6InVzZXIiLCJleHAiOjE2NTU3MTc5NTF9.xr7gSxZiHzytazAUbQw7XKDaC5Z34kPMPGEr9TAvHtU"`
  
 `}`
+
+# List Products / List Book
+
+* ![path](https://user-images.githubusercontent.com/100668235/174638909-2aad9d16-3da8-4218-ae9c-981e91b92cda.PNG)
+
+* Reponse
+![response](https://user-images.githubusercontent.com/100668235/174639074-9c4b17ce-4498-44c2-ae60-6a4e0cad4cd3.PNG)

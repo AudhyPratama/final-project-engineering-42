@@ -74,10 +74,6 @@ func main() {
 		FOREIGN KEY (book_id) REFERENCES books(id)
 	);
 
-	INSERT INTO shopping_cart (id, book_id, quantity) VALUES
-		(531237, 071235, 1),
-		(531238, 071236, 2);
-
 	CREATE TABLE IF NOT EXISTS payment (
 		id integer not null primary key AUTOINCREMENT,
 		cart_id integer not null,
@@ -88,9 +84,6 @@ func main() {
 		FOREIGN KEY (cart_id) REFERENCES shopping_cart(id)
 	);
 
-	INSERT INTO payment (id, cart_id, metode, alamat, ongkos_kirim, time_payment) VALUES
-		(331639, 531237, "COD", "Jl. Raya Kedungkandang No.1", 10000, "2022-06-15 00:00:00"),
-		(331640, 531238, "COD", "Jl. Raya Kedungkandang No.2", 14000, "2022-06-16 00:00:00");
 	`)
 
 	if err != nil {
