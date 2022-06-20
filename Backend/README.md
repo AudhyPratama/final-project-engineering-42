@@ -12,7 +12,8 @@
 
 
 # API Documentation
-Register (User harus mendaftar akun terlebih dahulu)
+* Register (User harus mendaftar akun terlebih dahulu)
+* Login (User dapat login dengan akun yang telah terdaftar)
 
 # Register
 
@@ -20,38 +21,37 @@ Register (User harus mendaftar akun terlebih dahulu)
 
 + request Body
 
-    `{`
-    `
-        `"name":"budi",`
-        `"email":"budi@yahoo.com",`
-        `"password":"andibudi",`
-        `"role":"user"`
-    
-    `}`
+`{`
+
+  `"name": "Dito",`
+  `"email": "dito@gmail.com",`
+  `"password": "dito7654",`
+  `"role": "user"`
+
+`}`
 
 + response `Status:200 OK`
 
 `{`
-`
-    `Account registered successfully`
-`
+
+  `Account registered successfully`
+
 `}`
 
 
-Login (User dapat login dengan akun yang telah terdaftar)
+
 # Login
 
 `POST : http://localhost:8080/api/user/login`
 
 + request Body
 
-    `{`
-`
-        `"email":"dito@gmail",`
-        `"password":"dito7654" `
-`
-    `}`
+`{`
 
+  `"email": "dito@gmail.com",`
+  `"password": "dito7654"`
+
+`}`
 
 + response `Status:200 OK`
 
