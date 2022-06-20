@@ -12,9 +12,9 @@
 
 # How to run Service
 Run the following code in the terminal:
-1. Migration : run `main.go` inside directory `Backend\db\migration` to Migration database SQLite
+1. Migration : run `main.go` inside directory `Backend\db` to Migration database SQLite
 
-* `go run Backend\db\migration\main.go`
+* `go run Backend\db\main.go`
 
 2. Main : run `main.go` inside directory `Backend` to running main Service
 
