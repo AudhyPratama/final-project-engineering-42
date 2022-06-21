@@ -81,7 +81,7 @@ func main() {
 		alamat TEXT not null,
 		ongkos_kirim float not null,
 		waktu_pembayaran timestamp not null,
-		FOREIGN KEY (cart_id) REFERENCES shopping_cart(id)
+		FOREIGN KEY (orders_id) REFERENCES orders(id)
 	);
 
 	`)

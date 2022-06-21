@@ -25,9 +25,9 @@ func (c *CartRepository) FetchCarts() ([]OrderCart, error) {
 		b.book_name,
 		b.penulis,
 		b.penerbit,
-		b.price
+		b.harga
 	FROM orders o
-	INNER JOIN book b ON o.book_id = b.id`
+	INNER JOIN books b ON o.book_id = b.id`
 
 	rows, err := c.db.Query(sqlStatement)
 	if err != nil {
@@ -67,9 +67,9 @@ func (c *CartRepository) FetchCartByID(BookID int64) (OrderCart, error) {
 		b.book_name,
 		b.penulis,
 		b.penerbit,
-		b.price
+		b.harga
 	FROM orders o
-	INNER JOIN book b ON o.book_id = b.id
+	INNER JOIN books b ON o.book_id = b.id
 	WHERE o.id = ?`
 
 	row := c.db.QueryRow(sqlStatement, BookID)
@@ -131,7 +131,7 @@ func (c *CartRepository) ResetCart() error {
 func (c *CartRepository) TotalPrice() (int, error) {
 	var sqlStatement string
 
-	sqlStatement = `SELECT SUM(b.harga * o.quantity) FROM orders o INNER JOIN book b ON o.book_id = b.id`
+	sqlStatement = `SELECT SUM(b.harga * o.quantity) FROM orders o INNER JOIN books b ON o.book_id = b.id`
 
 	var totalPrice int
 	err := c.db.QueryRow(sqlStatement).Scan(&totalPrice)

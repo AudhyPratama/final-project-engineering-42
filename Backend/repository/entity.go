@@ -17,7 +17,7 @@ type Book struct {
 	Penulis      string  `db:"penulis"`
 	Penerbit     string  `db:"penerbit"`
 	Kondisi      string  `db:"kondisi"`
-	Berat        int64   `db:"berat"`
+	Berat        string  `db:"berat"`
 	Stock        int64   `db:"stock"`
 	Harga        float64 `db:"harga"`
 	Deskripsi    string  `db:"deskripsi"`
@@ -36,7 +36,7 @@ type OrderCart struct {
 	CategoryName string  `db:"category_name"`
 	Penulis      string  `db:"penulis"`
 	Penerbit     string  `db:"penerbit"`
-	berat        int64   `db:"berat"`
+	berat        string  `db:"berat"`
 	Quantity     int64   `db:"quantity"`
 	Harga        float64 `db:"harga"`
 }
