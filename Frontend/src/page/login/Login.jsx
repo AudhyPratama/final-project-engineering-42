@@ -7,7 +7,7 @@ import "./Login.css";
 function LoginUi () {
     return (
         <div className="container">
-            <h1 className="title-1">Pes<span>Buk</span></h1>
+            <h1 className="App-title-1">Pes<span>Buk</span></h1>
             <LoginFormComponent />
         </div>
     );
