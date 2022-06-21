@@ -1,8 +1,10 @@
 import React from "react";
 
+import './Profile.css';
+
 function Profile () {
     return (
-        <h1>Ini profile</h1>
+        <h1>Ini halaman profile</h1>
     );
 }
 
