@@ -44,13 +44,13 @@ function LoginFormComponent () {
             .then(function (response) {
                 console.log('axios', response);
                 // setMsg(response.data.data.message);
-                // localStorage.setItem("token", response.data.data.token);
+                localStorage.setItem("token", response.data.data.token);
                 // console.log(response.data.data.token);
                 // history.push('/');
                 window.location.href = "/dashboard";
             })
             .catch (function (error) {
-                console.log('error');
+                console.log(error);
             })
     }
 
