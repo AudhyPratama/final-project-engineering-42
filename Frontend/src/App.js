@@ -2,16 +2,16 @@ import React from 'react';
 
 import "./App.css";
 
-// import DashboardUi from './page/Dashboard';
-import LoginUi from "./page/Login";
+import DashboardUi from './page/dashboard/Dashboard';
+// import LoginUi from "./page/login/Login";
 
 
 
 function App() {
   return (
     <div className='App'>
-      <LoginUi />
-      {/* <DashboardUi /> */}
+      {/* <LoginUi /> */}
+      <DashboardUi />
     </div> 
   );
 }
