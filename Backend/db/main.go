@@ -21,7 +21,7 @@ func main() {
 		role varchar(100) not null
 	);
 	
-	INSERT INTO users (id, name, email, password, role) VALUES 
+	INSERT or REPLACE INTO users (id, name, email, password, role) VALUES 
 		(110108,"Dito","dito@gmail.com","dito7654","user"), 
 		(120193, "Dio", "dio@gmail.com", "dio12", "user");
 	
@@ -30,7 +30,7 @@ func main() {
 		name varchar(100) not null
 	);
 
-	INSERT INTO categori (id, name) VALUES
+	INSERT or REPLACE INTO categori (id, name) VALUES
 		(965321, "Politik"),
 		(965322, "Olahraga"),
 		(965323, "Kesehatan"),
@@ -53,7 +53,7 @@ func main() {
 		FOREIGN KEY (categori_id) REFERENCES categori(id)
 	);
 
-	INSERT INTO books (id, user_id, categori_id, title, penulis, berat, stock, price, description) VALUES
+	INSERT or REPLACE INTO books (id, user_id, categori_id, title, penulis, berat, stock, price, description) VALUES
 		(071235, 110108, 965321, "How To Win An Argument", "abcdef", "200 Gram", 50, 80.999, 
 		" Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
 		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
