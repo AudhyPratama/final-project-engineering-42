@@ -1,6 +1,8 @@
-import LoginFormComponent from "../components/LoginForm";
+import LoginFormComponent from "../login/components/LoginForm";
+import ForgotPassword from "./components/ForgotPassword";
+import SignupForm from "./components/SignupForm";
 
-import "../asset/css/Login.css";
+import "./Login.css";
 
 function LoginUi () {
     return (

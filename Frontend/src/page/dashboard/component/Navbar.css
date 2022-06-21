@@ -26,10 +26,20 @@ div .title-1 {
     margin: 0 30px;
 }
 
-/* *{
-    padding: 0;
-    margin: 0;
-} */
+.App-logo {
+    text-decoration: none;
+}
+
+.App-logo h2{
+    font-family: 'Mulish', Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    color: #fff;
+    font-weight: 900;
+}
+
+.App-logo span {
+    color: #1778F2;
+}
 
 .Navbar li {
     margin: 0 20px;

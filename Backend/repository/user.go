@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+	"net/mail"
 )
 
 type UserRepository struct {
@@ -76,4 +77,9 @@ func (u *UserRepository) FetchUserRole(email string) (*string, error) {
 		return nil, errors.New("Role not found")
 	}
 	return &user.Role, nil
+}
+
+func (u *UserRepository) Valid(email string) bool {
+	_, err := mail.ParseAddress(email)
+	return err == nil
 }

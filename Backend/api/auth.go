@@ -44,21 +44,30 @@ func (api *API) signup(w http.ResponseWriter, req *http.Request) {
 	res, _ := api.userRepo.FetchUsersByEmail(user.Email)
 	if len(res) > 0 {
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Email already exists"))
+		w.Write([]byte("Email already used"))
 		return
 	} else if user.Email == "" || user.Password == "" {
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Email or Password is empty"))
+		w.Write([]byte("Email or Password cannot be empty"))
+		return
+	} else if !api.userRepo.Valid(user.Email) {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Email is not valid"))
+		return
+	} else if !(user.Role == "admin" || user.Role == "user") {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Role must be admin or user"))
 		return
 	} else {
 		err := api.userRepo.Signup(user.Name, user.Email, user.Password, user.Role)
 		if err != nil {
-			w.Write([]byte("Error signing up"))
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("Signup failed"))
 			return
 		}
 
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Signup success"))
+		w.Write([]byte("Account registered successfully"))
 	}
 
 }
