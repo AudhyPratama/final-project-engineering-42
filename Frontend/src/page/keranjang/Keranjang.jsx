@@ -1,8 +1,10 @@
 import React from "react";
 
+import './Keranjang.css';
+
 function Keranjang () {
     return (
-        <h1>Ini keranjang</h1>
+        <h1>Ini halaman keranjang</h1>
     );
 }
 
