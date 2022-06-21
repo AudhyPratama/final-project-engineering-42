@@ -15,7 +15,8 @@ func main() {
 	}
 
 	userRepo := repository.NewUserRepository(db)
-	productRepo := repository.NewProductRepository(db)
-	mainAPI := api.NewAPI(*userRepo, *productRepo)
+	bookRepo := repository.NewBookRepository(db)
+	cartRepo := repository.NewCartRepository(db)
+	mainAPI := api.NewAPI(*userRepo, *bookRepo, *cartRepo)
 	mainAPI.Start()
 }
