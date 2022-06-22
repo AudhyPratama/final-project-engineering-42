@@ -90,7 +90,7 @@ func (b *BookRepository) FetchDetailBook(request GetBookRequest) ([]Book, error)
 	sqlStatement = `SELECT * FROM books WHERE book_name LIKE '%` + request.BookName + `%'`
 
 	if isValidRequest := request.IsValidRequest(); !isValidRequest {
-		return nil, fmt.Errorf("Bad Request")
+		return nil, fmt.Errorf("bad request")
 	}
 
 	if request.BookName != "" {

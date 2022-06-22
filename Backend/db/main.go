@@ -48,31 +48,34 @@ func main() {
 		kondisi varchar(100) not null,
 		berat varchar(100) not null,
 		stock integer not null,
-		harga float not null,
+		harga integer not null,
 		deskripsi text,
 		FOREIGN KEY (categori_id) REFERENCES categories(id)
 	);
 
 	INSERT INTO books (id, categori_id, book_name, penulis, penerbit, kondisi, berat, stock, harga, deskripsi) VALUES
-		(071235, 965321, "How To Win An Argument", "abcdef", "ghijk", "baru", "200 Gram", 50, 80.999, 
+		(071235, 965321, "How To Win An Argument", "abcdef", "ghijk", "baru", "200 Gram", 50, 80000, 
 		" Lorem ipsum dolor sit amet, consectetur adipiscing elit"),
-		(071236, 965321, "Matinya Demokrasi dan Kuasa Teknologi", "Jamie Bartlett", "lmnop", "baru", "350 Gram", 5, 75.999,
+		(071236, 965321, "Matinya Demokrasi dan Kuasa Teknologi", "Jamie Bartlett", "lmnop", "baru", "350 Gram", 5, 75999,
 		"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
-		(071237, 965327, "The Power of Habit", "Charles Duhigg", "qrstu", "baru", "200 Gram", 50, 80.999,
+		(071237, 965327, "The Power of Habit", "Charles Duhigg", "qrstu", "baru", "200 Gram", 50, 80500,
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit"),
-		(071238, 965322, "The Ultimate Guide to Soccer", "Jamie Bartlett", "vwxyz", "baru", "350 Gram", 5, 75.999,
+		(071238, 965322, "The Ultimate Guide to Soccer", "Jamie Bartlett", "vwxyz", "baru", "350 Gram", 5, 75500,
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit");
 	
 	CREATE TABLE IF NOT EXISTS orders (
-		id integer not null primary key AUTOINCREMENT,
+		order_id integer not null primary key AUTOINCREMENT,
 		book_id integer not null,
 		quantity integer not null,
 		FOREIGN KEY (book_id) REFERENCES books(id)
 	);
 
-	INSERT INTO orders (id, book_id, quantity) VALUES
-		(071237, 110108, 1),
-		(071238, 120193, 2);
+	INSERT INTO orders (order_id, book_id, quantity) VALUES
+		(11, 071235, 1),
+		(12, 071236, 2),
+		(13, 071237, 3),
+		(14, 071238, 4);
+
 
 	CREATE TABLE IF NOT EXISTS payment (
 		id integer not null primary key AUTOINCREMENT,
@@ -81,7 +84,7 @@ func main() {
 		alamat TEXT not null,
 		ongkos_kirim float not null,
 		waktu_pembayaran timestamp not null,
-		FOREIGN KEY (orders_id) REFERENCES orders(id)
+		FOREIGN KEY (orders_id) REFERENCES orders(order_id)
 	);
 
 	`)
