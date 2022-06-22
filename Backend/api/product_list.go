@@ -1,36 +1,47 @@
 package api
 
 import (
+	"backend/repository"
 	"encoding/json"
 	"net/http"
 )
 
-type ProductListErrorResponse struct {
+type BookListErrorResponse struct {
 	Error string `json:"error"`
 }
 
-type Product struct {
-	Name    string  `json:"name"`
-	Penulis string  `json:"penulis"`
-	Price   float64 `json:"price"`
+type Book struct {
+	Name         string  `json:"name"`
+	Penulis      string  `json:"penulis"`
+	Penerbit     string  `json:"penerbit"`
+	CategoryName string  `json:"category_name"`
+	Kondisi      string  `json:"kondisi"`
+	Berat        string  `json:"berat"`
+	Stock        int64   `json:"stock"`
+	Harga        float64 `json:"harga"`
+	Deskripsi    string  `json:"deskripsi"`
 }
 
-type ProductListSuccessResponse struct {
-	Products []Product `json:"products"`
+type BookListSuccessResponse struct {
+	Books []Book `json:"products"`
 }
 
-func (api *API) productList(w http.ResponseWriter, req *http.Request) {
+type DetailBookResponse struct {
+	Book []repository.Book `json:"book"`
+}
+
+func (api *API) booktList(w http.ResponseWriter, req *http.Request) {
 	api.AllowOrigin(w, req)
 	encoder := json.NewEncoder(w)
 
-	response := ProductListSuccessResponse{}
-	response.Products = make([]Product, 0)
+	response := BookListSuccessResponse{}
+	response.Books = make([]Book, 0)
 
-	products, err := api.productRepo.FetchProducts()
+	books, err := api.bookRepo.FetchBooks()
 	defer func() {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			encoder.Encode(ProductListErrorResponse{Error: err.Error()})
+			encoder.Encode(BookListErrorResponse{Error: err.Error()})
 			return
 		}
 	}()
@@ -38,13 +49,51 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	for _, product := range products {
-		response.Products = append(response.Products, Product{
-			Name:    product.Title,
-			Penulis: product.Penulis,
-			Price:   product.Price,
+	for _, book := range books {
+		response.Books = append(response.Books, Book{
+			CategoryName: book.CategoryName,
+			Name:         book.BookName,
+			Penulis:      book.Penulis,
+			Penerbit:     book.Penerbit,
+			Kondisi:      book.Kondisi,
+			Berat:        book.Berat,
+			Stock:        book.Stock,
+			Harga:        book.Harga,
+			Deskripsi:    book.Deskripsi,
 		})
 	}
 
 	encoder.Encode(response)
+}
+
+func (api *API) getBook(w http.ResponseWriter, req *http.Request) {
+	api.AllowOrigin(w, req)
+	bookName := req.URL.Query().Get("book_name")
+	penulis := req.URL.Query().Get("penulis")
+	penerbit := req.URL.Query().Get("penerbit")
+
+	getBookRequest := repository.GetBookRequest{
+		BookName: bookName,
+		Penulis:  penulis,
+		Penerbit: penerbit,
+	}
+
+	encoder := json.NewEncoder(w)
+
+	books, err := api.bookRepo.FetchDetailBook(getBookRequest)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(BookListErrorResponse{Error: err.Error()})
+		return
+	}
+
+	// jika request tidak sama dengan yang ada di database, maka akan menampilkan error
+	if len(books) == 0 {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(BookListErrorResponse{Error: "Book not found"})
+		return
+	}
+
+	encoder.Encode(DetailBookResponse{Book: books})
+	w.WriteHeader(http.StatusOK)
 }

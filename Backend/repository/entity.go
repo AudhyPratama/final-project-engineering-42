@@ -10,40 +10,58 @@ type User struct {
 }
 
 type Book struct {
-	ID          int64   `db:"id"`
-	UserID      int64   `db:"user_id"`
-	CategoryID  int64   `db:"category_id"`
-	Title       string  `db:"title"`
-	Penulis     string  `db:"penulis"`
-	Berat       int64   `db:"berat"`
-	Stock       int64   `db:"stock"`
-	Price       float64 `db:"price"`
-	Description string  `db:"description"`
-}
-
-type DetailBook struct {
-	BookID       int64   `db:"book_id"`
+	ID           int64   `db:"id"`
+	CategoryID   int64   `db:"category_id"`
 	CategoryName string  `db:"category_name"`
-	Title        string  `db:"title"`
+	BookName     string  `db:"book_name"`
 	Penulis      string  `db:"penulis"`
-	Berat        int64   `db:"berat"`
+	Penerbit     string  `db:"penerbit"`
+	Kondisi      string  `db:"kondisi"`
+	Berat        string  `db:"berat"`
 	Stock        int64   `db:"stock"`
-	Price        float64 `db:"price"`
-	Description  string  `db:"description"`
+	Harga        float64 `db:"harga"`
+	Deskripsi    string  `db:"deskripsi"`
 }
 
-type Categori struct {
+type Category struct {
 	ID   int64  `db:"id"`
 	Name string `db:"name"`
 }
 
-type ItemCart struct {
+type OrderCart struct {
 	ID           int64   `db:"id"`
-	UserID       int64   `db:"user_id"`
 	BookID       int64   `db:"book_id"`
-	Title        string  `db:"title"`
+	BookName     string  `db:"book_name"`
+	CategotyID   int64   `db:"category_id"`
 	CategoryName string  `db:"category_name"`
 	Penulis      string  `db:"penulis"`
+	Penerbit     string  `db:"penerbit"`
+	berat        string  `db:"berat"`
 	Quantity     int64   `db:"quantity"`
-	Price        float64 `db:"price"`
+	Harga        float64 `db:"harga"`
+}
+
+type GetBookRequest struct {
+	BookName string `json:"book_name"`
+	Penulis  string `json:"penulis"`
+	Penerbit string `json:"penerbit"`
+}
+
+func (r GetBookRequest) IsEmptyRequest() bool {
+	if r.BookName == "" && r.Penulis == "" && r.Penerbit == "" {
+		return true
+	}
+
+	return false
+}
+
+func (r GetBookRequest) IsValidRequest() bool {
+	if r.BookName == "" && r.Penulis == "" && r.Penerbit == "" {
+		return false
+	}
+	if r.BookName != "" && r.Penulis != "" && r.Penerbit != "" {
+		return false
+	}
+
+	return true
 }

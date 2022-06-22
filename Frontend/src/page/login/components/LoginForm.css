@@ -119,9 +119,9 @@ input {
 }
 
 .login-btn:hover {
-    background-color: #3a4eff;
-    color: #b6b9da;
-    border: 2px solid #e1e4ff;
+    background-color: rgb(54, 121, 255);
+    color: #dfdfdf;
+    border: 2px solid #ffffff;
     
     font-size: 25px;
     font-weight: 500;

@@ -43,10 +43,12 @@ function LoginFormComponent () {
             )
             .then(function (response) {
                 console.log('axios', response);
-                // setMsg(response.data.data.message);
+                setMsg(response.data.data.message);
+                // console.log('axios', response);
                 localStorage.setItem("token", response.data.data.token);
-                // console.log(response.data.data.token);
-                // history.push('/');
+                // localStorage.setItem("loggedIn", "bill_issuer");
+                console.log(response.data.data.token);
+                history.push('/');
                 window.location.href = "/dashboard";
             })
             .catch (function (error) {

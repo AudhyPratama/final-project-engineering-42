@@ -5,6 +5,9 @@
 * `POST` : `/api/user/login`
 * `POST` : `/api/user/logout`
 * `GET`  : `/api/products`
+* `GET`  : `/api/book?book_name=<book_name>`
+* `GET`  : `/api/book?penulis=<penulis>`
+* `GET`  : `/api/book?penerbit=<penerbit>`
 
 # How to run Service
 * Database : Masuk ke directory `Backend`, lalu run `go run db\main.go`, untuk running database SQLite
