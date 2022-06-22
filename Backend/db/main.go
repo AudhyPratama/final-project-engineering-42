@@ -21,7 +21,7 @@ func main() {
 		role varchar(100) not null
 	);
 	
-	INSERT INTO users (id, name, email, password, role) VALUES 
+	INSERT or REPLACE INTO users (id, name, email, password, role) VALUES 
 		(110108,"Dito","dito@gmail.com","dito7654","user"), 
 		(120193, "Dio", "dio@gmail.com", "dio12", "user");
 	
@@ -30,7 +30,7 @@ func main() {
 		name varchar(100) not null
 	);
 
-	INSERT INTO categories (id, name) VALUES
+	INSERT or REPLACE INTO categories (id, name) VALUES
 		(965321, "Politik"),
 		(965322, "Olahraga"),
 		(965323, "Kesehatan"),

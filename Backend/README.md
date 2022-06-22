@@ -12,7 +12,7 @@
 * `GET`  : `/api/cart/delete`
 
 # How to run Service
-* Database : Masuk ke directory `Backend`, lalu run `go run db\main.go`, untuk running database SQLite
+* Migration : Masuk ke directory `Backend`, lalu run `go run db\main.go`, untuk running Migration database SQLite
 
 * Main : Masuk ke directory `Backend`, lalu run `go run main.go` untuk running main Service
 
