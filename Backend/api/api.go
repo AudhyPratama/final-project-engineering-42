@@ -39,6 +39,3 @@ func (api *API) Start() {
 	fmt.Println("starting web server at http://localhost:8080/")
 	http.ListenAndServe(":8080", api.Handler())
 }
-
-// cara menggunakan di postman
-// http://localhost:8080/api/cart/delete/12
