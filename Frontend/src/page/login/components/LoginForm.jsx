@@ -81,7 +81,7 @@ function LoginFormComponent () {
                                 <input type="password" placeholder="password" className="name" onChange={handleChange('password')}/>
                             </div>
                             <div className="login-button">
-                                <button type="submit" >Login</button>
+                                <button className="login-btn" type="submit" >Login</button>
                             </div>
                         </form>
                         <div className="link">
