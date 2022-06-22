@@ -30,11 +30,7 @@ func main() {
 		name varchar(100) not null
 	);
 
-<<<<<<< HEAD
-	INSERT or REPLACE INTO categori (id, name) VALUES
-=======
 	INSERT INTO categories (id, name) VALUES
->>>>>>> 23c91131ffa21ba43ccf40193d56b98c16a7b6a3
 		(965321, "Politik"),
 		(965322, "Olahraga"),
 		(965323, "Kesehatan"),

@@ -44,11 +44,10 @@ function LoginFormComponent () {
             .then(function (response) {
                 console.log('axios', response);
                 setMsg(response.data.data.message);
-                // console.log('axios', response);
                 localStorage.setItem("token", response.data.data.token);
                 // localStorage.setItem("loggedIn", "bill_issuer");
                 console.log(response.data.data.token);
-                history.push('/');
+                // history.push('/');
                 window.location.href = "/dashboard";
             })
             .catch (function (error) {
@@ -85,9 +84,9 @@ function LoginFormComponent () {
                             </div>
                         </form>
                         <div className="link">
-                            <a href="#">Forgot password ?</a> Or <a href="#">Sign Up</a>
-                            {/* <Router exact path="/forgot-password" component={ForgotPassword}/>
-                            <Router exact path="/sign-up" component={SignupForm}/> */}
+                            {/* <a href="/forgot-password">Forgot password ?</a> Or <a href="/sign-up">Sign Up</a> */}
+                            <Router exact path="/forgot-password" component={ForgotPassword}/>
+                            <Router exact path="/sign-up" component={SignupForm}/>
                             
                         </div>
                     </div>
