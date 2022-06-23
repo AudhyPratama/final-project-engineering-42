@@ -1,29 +1,27 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Link, Router } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-import ForgotPassword from "./ForgotPassword";
-import SignupForm from "./SignupForm";
+// IMAGE IMPORTS
+import userIcon from '../../../asset/icons/user.png';
+import readingIcon from '../../../asset/icons/reading.png';
+import emailIcon from '../../../asset/icons/email.png';
+import lockIcon from '../../../asset/icons/padlock.png';
 
-import userIcon from "../../../asset/icons/user.png";
-import emailIcon from "../../../asset/icons/email.png";
-import lockIcon from "../../../asset/icons/padlock.png";
-import readingIcon from "../../../asset/icons/reading.png";
-
+// CSS
 import './LoginForm.css';
 
-function LoginFormComponent () {
-    const [msg, setMsg] = useState ('');
-    const [values, setValues] = useState({
+const LoginForm = () => { 
+    const [state, setState] = useState({
         email: '',
         password: ''
     });
-    
-    // const email = useRef();
-    // const password = useRef();
+
     const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
+        setState({ ...state, [prop]: event.target.state });
     };
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -32,8 +30,8 @@ function LoginFormComponent () {
             .post(
                 'http://localhost:8080/api/user/login',
                 {
-                    email: values.email,
-                    password: values.password,
+                    email: state.email,
+                    password: state.password,
                 },
                 {
                     Headers: {
@@ -43,11 +41,8 @@ function LoginFormComponent () {
             )
             .then(function (response) {
                 console.log('axios', response);
-                setMsg(response.data.data.message);
                 localStorage.setItem("token", response.data.data.token);
-                // localStorage.setItem("loggedIn", "bill_issuer");
                 console.log(response.data.data.token);
-                // history.push('/');
                 window.location.href = "/dashboard";
             })
             .catch (function (error) {
@@ -56,12 +51,12 @@ function LoginFormComponent () {
     }
 
     return (
-        <div className="main">
-            <div className="sub-main">
+        <div className='main'>
+            <div className='sub-main'>
                 <div>
-                <h1>Welcome back <span><img src={readingIcon} alt="reading icon" /></span></h1>
-                    <div className="imgs">
-                        <div className="container-image"> 
+                    <h1>Welcome Back <span><img src={readingIcon} alt="reading icon"></img></span></h1>
+                    <div className='imgs'>
+                        <div className='container-image'>
                             <img src={userIcon} alt="profile" className="profile"/>
                         </div>
                     </div>
@@ -70,7 +65,7 @@ function LoginFormComponent () {
                         <h2>Sign in page</h2>
                         <form onSubmit={handleSubmit}>
                             <div>
-                                <h3>Username</h3>
+                                <h3>Email</h3>
                                 <img src={emailIcon} alt="email" className="email"/>
                                 <input type="text" placeholder="loremipsum@gmail.com" className="name" onChange={handleChange('email')}/>
                             </div>
@@ -84,16 +79,13 @@ function LoginFormComponent () {
                             </div>
                         </form>
                         <div className="link">
-                            {/* <a href="/forgot-password">Forgot password ?</a> Or <a href="/sign-up">Sign Up</a> */}
-                            <Router exact path="/forgot-password" component={ForgotPassword}/>
-                            <Router exact path="/sign-up" component={SignupForm}/>
-                            
+                            <a href="/forgot-password" onClick={() => navigate('/forgot-password')}>Forgot password ?</a> Or <a href="/sign-up" onClick={() => navigate('/sign-up')}>Sign Up</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
     );
 }
 
-export default LoginFormComponent;
+export default LoginForm;

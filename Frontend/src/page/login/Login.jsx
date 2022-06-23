@@ -1,17 +1,16 @@
-import LoginFormComponent from "../login/components/LoginForm";
-import ForgotPassword from "./components/ForgotPassword";
-import SignupForm from "./components/SignupForm";
+import React from 'react';
 
-import "./Login.css";
+import LoginForm from './components/LoginForm';
 
-function LoginUi () {
+import './Login.css';
+
+const Login = () => {
     return (
-        <div className="container">
-            <h1 className="App-title-1">Pes<span>Buk</span></h1>
-            <LoginFormComponent />
+        <div className='login-page'>
+            <h1 className='App-title-1'>Pes<span>Buk</span></h1>
+            <LoginForm/>
         </div>
     );
-    
 }
 
-export default LoginUi;
+export default Login;
