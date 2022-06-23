@@ -87,7 +87,21 @@ func (b *BookRepository) FetchBooksByName(book_name string) (Book, error) {
 func (b *BookRepository) FetchDetailBook(request GetBookRequest) ([]Book, error) {
 	var sqlStatement string
 
-	sqlStatement = `SELECT * FROM books WHERE book_name LIKE '%` + request.BookName + `%'`
+	sqlStatement = `SELECT 
+		b.id,
+		b.categori_id,
+		c.name as category_name,
+		b.book_name,
+		b.penulis,
+		b.penerbit,
+		b.kondisi,
+		b.berat,
+		b.stock,
+		b.harga,
+		b.deskripsi
+	 FROM books b
+	 INNER JOIN categories c ON b.categori_id = c.id
+	 WHERE book_name LIKE '%` + request.BookName + `%'`
 
 	if isValidRequest := request.IsValidRequest(); !isValidRequest {
 		return nil, fmt.Errorf("bad request")
@@ -117,6 +131,7 @@ func (b *BookRepository) FetchDetailBook(request GetBookRequest) ([]Book, error)
 		err := rows.Scan(
 			&book.ID,
 			&book.CategoryID,
+			&book.CategoryName,
 			&book.BookName,
 			&book.Penulis,
 			&book.Penerbit,

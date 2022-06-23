@@ -1,5 +1,7 @@
 package repository
 
+import "time"
+
 type User struct {
 	ID       int64  `db:"id"`
 	Name     string `db:"name"`
@@ -32,7 +34,7 @@ type OrderCart struct {
 	OrderID      int64  `db:"order_id"`
 	BookID       int64  `db:"book_id"`
 	BookName     string `db:"book_name"`
-	CategotyID   int64  `db:"category_id"`
+	CategoryID   int64  `db:"category_id"`
 	CategoryName string `db:"category_name"`
 	Penulis      string `db:"penulis"`
 	Penerbit     string `db:"penerbit"`
@@ -46,8 +48,15 @@ type GetBookRequest struct {
 	Penerbit string `json:"penerbit"`
 }
 
-type GetCartRequest struct {
-	OrderID int64 `json:"order_id"`
+type Payment struct {
+	ID               int64      `db:"id"`
+	OrderID          int64      `db:"order_id"`
+	UserID           int64      `db:"user_id"`
+	MetodePembayaran string     `db:"metode_pembayaran"`
+	Alamat           string     `db:"alamat"`
+	OngkosKirim      int64      `db:"ongkos_kirim"`
+	TotalPayment     int64      `db:"total_payment"`
+	TimePayment      *time.Time `db:"time_payment"`
 }
 
 func (r GetBookRequest) IsEmptyRequest() bool {
@@ -63,25 +72,6 @@ func (r GetBookRequest) IsValidRequest() bool {
 		return false
 	}
 	if r.BookName != "" && r.Penulis != "" && r.Penerbit != "" {
-		return false
-	}
-
-	return true
-}
-
-func (r GetCartRequest) IsEmptyRequest() bool {
-	if r.OrderID == 0 {
-		return true
-	}
-
-	return false
-}
-
-func (r GetCartRequest) IsValidRequest() bool {
-	if r.OrderID == 0 {
-		return false
-	}
-	if r.OrderID != 0 {
 		return false
 	}
 

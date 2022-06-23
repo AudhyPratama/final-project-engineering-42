@@ -26,7 +26,7 @@ func NewAPI(userRepo repository.UserRepository, bookRepo repository.BookReposito
 	mux.Handle("/api/products", api.GET(http.HandlerFunc(api.booktList)))
 	mux.Handle("/api/book", api.GET(http.HandlerFunc(api.getBook)))
 	mux.Handle("/api/cart/add", api.POST(http.HandlerFunc(api.addToCart)))
-	mux.Handle("/api/carts", api.GET(http.HandlerFunc(api.fetchCart)))
+	mux.Handle("/api/carts", api.GET(http.HandlerFunc(api.getCart)))
 	mux.Handle("/api/cart/delete", api.GET(http.HandlerFunc(api.deleteAllCart)))
 
 	return api

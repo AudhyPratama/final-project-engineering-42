@@ -54,13 +54,13 @@ func main() {
 	);
 
 	INSERT INTO books (id, categori_id, book_name, penulis, penerbit, kondisi, berat, stock, harga, deskripsi) VALUES
-		(071235, 965321, "How To Win An Argument", "abcdef", "ghijk", "baru", "200 Gram", 50, 80000, 
+		(071235, 965321, "How To Win An Argument", "Marcus Tullius Cicero", "Kepustakaan Populer Gramedia", "baru", "525 Gram", 50, 100000, 
 		" Lorem ipsum dolor sit amet, consectetur adipiscing elit"),
-		(071236, 965321, "Matinya Demokrasi dan Kuasa Teknologi", "Jamie Bartlett", "lmnop", "baru", "350 Gram", 5, 75999,
+		(071236, 965323, "Covid 19: Seluk Beluk Corona Virus", "Prof.Dr.dr.Anies, M.Kes, PKK", "Ar-ruzz Media", "baru", "350 Gram", 13, 40000,
 		"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
-		(071237, 965327, "The Power of Habit", "Charles Duhigg", "qrstu", "baru", "200 Gram", 50, 80500,
+		(071237, 965326, "Filsafat Sosial", "Hans Fink", "Pustaka Pelajar", "baru", "200 Gram", 78, 30500,
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit"),
-		(071238, 965322, "The Ultimate Guide to Soccer", "Jamie Bartlett", "vwxyz", "baru", "350 Gram", 5, 75500,
+		(071238, 965325, "Jatuh Bangun Jadi Pengusaha", "Ervina Pitasari", "Checklist", "baru", "350 Gram", 15, 55500,
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit");
 	
 	CREATE TABLE IF NOT EXISTS orders (

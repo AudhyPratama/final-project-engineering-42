@@ -11,6 +11,7 @@ type BookListErrorResponse struct {
 }
 
 type Book struct {
+	ID           int64  `json:"id"`
 	Name         string `json:"name"`
 	Penulis      string `json:"penulis"`
 	Penerbit     string `json:"penerbit"`
@@ -51,6 +52,7 @@ func (api *API) booktList(w http.ResponseWriter, req *http.Request) {
 
 	for _, book := range books {
 		response.Books = append(response.Books, Book{
+			ID:           book.ID,
 			CategoryName: book.CategoryName,
 			Name:         book.BookName,
 			Penulis:      book.Penulis,

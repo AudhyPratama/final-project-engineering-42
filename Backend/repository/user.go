@@ -74,7 +74,7 @@ func (u *UserRepository) FetchUserRole(email string) (*string, error) {
 
 	err := u.db.QueryRow(`SELECT role FROM users WHERE email = ?`, email).Scan(&user.Role)
 	if err != nil {
-		return nil, errors.New("Role not found")
+		return nil, errors.New("role not found")
 	}
 	return &user.Role, nil
 }

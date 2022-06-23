@@ -20,14 +20,15 @@ func (c *CartRepository) FetchCarts() ([]OrderCart, error) {
 	sqlStatement = `
 	SELECT
 		o.order_id,
-		o.book_id,
 		o.quantity,
 		b.book_name,
 		b.penulis,
+		c.name as category_name,
 		b.penerbit,
 		b.harga
 	FROM orders o
-	INNER JOIN books b ON o.book_id = b.id`
+	INNER JOIN books b ON o.book_id = b.id
+	INNER JOIN categories c ON b.categori_id = c.id`
 
 	rows, err := c.db.Query(sqlStatement)
 	if err != nil {
@@ -40,10 +41,10 @@ func (c *CartRepository) FetchCarts() ([]OrderCart, error) {
 		var cart OrderCart
 		err := rows.Scan(
 			&cart.OrderID,
-			&cart.BookID,
 			&cart.Quantity,
 			&cart.BookName,
 			&cart.Penulis,
+			&cart.CategoryName,
 			&cart.Penerbit,
 			&cart.Harga)
 		if err != nil {
@@ -147,46 +148,4 @@ func (c *CartRepository) TotalPrice() (int, error) {
 	}
 
 	return totalPrice, nil
-}
-
-func (c *CartRepository) FetchCartByBookName(book_name string) ([]OrderCart, error) {
-	var sqlStatement string
-
-	sqlStatement = `
-	SELECT
-		o.order_id,
-		o.book_id,
-		o.quantity,
-		b.book_name,
-		b.penulis,
-		b.penerbit,
-		b.harga
-	FROM orders o
-	INNER JOIN books b ON o.book_id = b.id
-	WHERE b.book_name = ?`
-
-	rows, err := c.db.Query(sqlStatement, book_name)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	var carts []OrderCart
-	for rows.Next() {
-		var cart OrderCart
-		err := rows.Scan(
-			&cart.OrderID,
-			&cart.BookID,
-			&cart.Quantity,
-			&cart.BookName,
-			&cart.Penulis,
-			&cart.Penerbit,
-			&cart.Harga)
-		if err != nil {
-			return nil, err
-		}
-		carts = append(carts, cart)
-	}
-
-	return carts, nil
 }

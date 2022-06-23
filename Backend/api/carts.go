@@ -1,10 +1,19 @@
 package api
 
 import (
-	"backend/repository"
 	"encoding/json"
 	"net/http"
 )
+
+type Cart struct {
+	OrderID      int64  `json:"order_id"`
+	BookName     string `json:"book_name"`
+	CategoryName string `json:"category_name"`
+	Penulis      string `json:"penulis"`
+	Penerbit     string `json:"penerbit"`
+	Quantity     int64  `json:"quantity"`
+	Harga        int64  `json:"harga"`
+}
 
 type CartErrorResponse struct {
 	Error string `json:"error"`
@@ -22,7 +31,7 @@ type AddtoCartRequest struct {
 }
 
 type CartResponse struct {
-	Carts []repository.OrderCart `json:"carts"`
+	Carts []Cart `json:"carts"`
 }
 
 type AddToCartListResponse struct {
@@ -83,21 +92,40 @@ func (api *API) addToCart(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (api *API) fetchCart(w http.ResponseWriter, r *http.Request) {
+func (api *API) getCart(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
-
 	encoder := json.NewEncoder(w)
 
+	response := CartResponse{}
+	response.Carts = make([]Cart, 0)
+
 	carts, err := api.cartRepo.FetchCarts()
+	defer func() {
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			encoder.Encode(CartErrorResponse{Error: err.Error()})
+			return
+		}
+	}()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		encoder.Encode(CartErrorResponse{Error: "Failed to fetch cart"})
+		encoder.Encode(CartErrorResponse{Error: err.Error()})
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	encoder.Encode(CartResponse{Carts: carts})
+	for _, cart := range carts {
+		response.Carts = append(response.Carts, Cart{
+			OrderID:      cart.OrderID,
+			BookName:     cart.BookName,
+			CategoryName: cart.CategoryName,
+			Penulis:      cart.Penulis,
+			Penerbit:     cart.Penerbit,
+			Quantity:     cart.Quantity,
+			Harga:        cart.Quantity * cart.Harga,
+		})
+	}
 
+	encoder.Encode(response)
 }
 
 func (api *API) deleteAllCart(w http.ResponseWriter, r *http.Request) {
@@ -110,5 +138,5 @@ func (api *API) deleteAllCart(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Success"))
+	w.Write([]byte("Delete All Success"))
 }
