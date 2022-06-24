@@ -21,16 +21,16 @@ func main() {
 		role varchar(100) not null
 	);
 	
-	INSERT INTO users (id, name, email, password, role) VALUES 
+	INSERT or REPLACE INTO users (id, name, email, password, role) VALUES 
 		(110108,"Dito","dito@gmail.com","dito7654","user"), 
 		(120193, "Dio", "dio@gmail.com", "dio12", "user");
 	
-	CREATE TABLE IF NOT EXISTS categori (
+	CREATE TABLE IF NOT EXISTS categories (
 		id integer not null primary key AUTOINCREMENT,
 		name varchar(100) not null
 	);
 
-	INSERT INTO categori (id, name) VALUES
+	INSERT or REPLACE INTO categories (id, name) VALUES
 		(965321, "Politik"),
 		(965322, "Olahraga"),
 		(965323, "Kesehatan"),
@@ -41,56 +41,52 @@ func main() {
 	
 	CREATE TABLE IF NOT EXISTS books (
 		id integer not null primary key AUTOINCREMENT,
-		user_id integer not null,
 		categori_id integer not null,
-		title varchar(100) not null,
+		book_name varchar(100) not null,
 		penulis varchar(100) not null,
+		penerbit varchar(100) not null,
+		kondisi varchar(100) not null,
 		berat varchar(100) not null,
 		stock integer not null,
-		price float not null,
-		description text,
-		FOREIGN KEY (user_id) REFERENCES users(id),
-		FOREIGN KEY (categori_id) REFERENCES categori(id)
+		harga integer not null,
+		deskripsi text,
+		FOREIGN KEY (categori_id) REFERENCES categories(id)
 	);
 
-	INSERT INTO books (id, user_id, categori_id, title, penulis, berat, stock, price, description) VALUES
-		(071235, 110108, 965321, "How To Win An Argument", "abcdef", "200 Gram", 50, 80.999, 
-		" Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-		Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-		Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-		Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-		(071236, 120193, 965321, "Matinya Demokrasi dan Kuasa Teknologi", "Jamie Bartlett", "350 Gram", 5, 75.999,
-		" Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-		Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-		Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-		Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+	INSERT INTO books (id, categori_id, book_name, penulis, penerbit, kondisi, berat, stock, harga, deskripsi) VALUES
+		(071235, 965321, "How To Win An Argument", "Marcus Tullius Cicero", "Kepustakaan Populer Gramedia", "baru", "525 Gram", 50, 100000, 
+		" Lorem ipsum dolor sit amet, consectetur adipiscing elit"),
+		(071236, 965323, "Covid 19: Seluk Beluk Corona Virus", "Prof.Dr.dr.Anies, M.Kes, PKK", "Ar-ruzz Media", "baru", "350 Gram", 13, 40000,
+		"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+		(071237, 965326, "Filsafat Sosial", "Hans Fink", "Pustaka Pelajar", "baru", "200 Gram", 78, 30500,
+		"Lorem ipsum dolor sit amet, consectetur adipiscing elit"),
+		(071238, 965325, "Jatuh Bangun Jadi Pengusaha", "Ervina Pitasari", "Checklist", "baru", "350 Gram", 15, 55500,
+		"Lorem ipsum dolor sit amet, consectetur adipiscing elit");
 	
-	CREATE TABLE IF NOT EXISTS shopping_cart (
-		id integer not null primary key AUTOINCREMENT,
+	CREATE TABLE IF NOT EXISTS orders (
+		order_id integer not null primary key AUTOINCREMENT,
 		book_id integer not null,
 		quantity integer not null,
 		FOREIGN KEY (book_id) REFERENCES books(id)
 	);
 
-	INSERT INTO shopping_cart (id, book_id, quantity) VALUES
-		(531237, 071235, 1),
-		(531238, 071236, 2);
+	INSERT INTO orders (order_id, book_id, quantity) VALUES
+		(11, 071235, 1),
+		(12, 071236, 2),
+		(13, 071237, 3),
+		(14, 071238, 4);
+
 
 	CREATE TABLE IF NOT EXISTS payment (
 		id integer not null primary key AUTOINCREMENT,
-		cart_id integer not null,
-		metode varchar(100) not null,
+		orders_id integer not null,
+		metode_pembayaran varchar(100) not null,
 		alamat TEXT not null,
 		ongkos_kirim float not null,
-		time_payment timestamp not null,
-		FOREIGN KEY (cart_id) REFERENCES shopping_cart(id)
+		waktu_pembayaran timestamp not null,
+		FOREIGN KEY (orders_id) REFERENCES orders(order_id)
 	);
 
-	INSERT INTO payment (id, cart_id, metode, alamat, ongkos_kirim, time_payment) VALUES
-		(331639, 531237, "COD", "Jl. Raya Kedungkandang No.1", 10000, "2022-06-15 00:00:00"),
-		(331640, 531238, "COD", "Jl. Raya Kedungkandang No.2", 14000, "2022-06-16 00:00:00");
 	`)
 
 	if err != nil {

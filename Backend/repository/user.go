@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+	"net/mail"
 )
 
 type UserRepository struct {
@@ -41,7 +42,7 @@ func (u *UserRepository) FetchUsersByEmail(email string) (string, error) {
 
 	err := u.db.QueryRow(`SELECT email FROM users WHERE email = ?`, email).Scan(&user.Email)
 	if err != nil {
-		return "", errors.New("Email not found")
+		return "", errors.New("email not found")
 	}
 	return user.Email, nil
 }
@@ -73,7 +74,12 @@ func (u *UserRepository) FetchUserRole(email string) (*string, error) {
 
 	err := u.db.QueryRow(`SELECT role FROM users WHERE email = ?`, email).Scan(&user.Role)
 	if err != nil {
-		return nil, errors.New("Role not found")
+		return nil, errors.New("role not found")
 	}
 	return &user.Role, nil
+}
+
+func (u *UserRepository) Valid(email string) bool {
+	_, err := mail.ParseAddress(email)
+	return err == nil
 }
