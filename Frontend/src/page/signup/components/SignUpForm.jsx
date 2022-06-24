@@ -1,5 +1,6 @@
 // MODULE
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // IMAGE
 import userIcon from '../../../asset/icons/user-white.png';
@@ -10,17 +11,21 @@ import lockIcon from '../../../asset/icons/padlock.png';
 import './SignUpForm.css';
 
 const SignUpForm = () => {
+    const navigate = useNavigate();
+
     const post = 1;
     // const handleChange ='' ;
+
+
     return (
         <div className='sign-up-component'>
             <div className='sign-up-container'>
                 <div>
                     <div className='back'>
-                        <a href='#'>Back</a>
+                        <a href="/" onClick={() => navigate('/')}>Back</a>
                     </div>
                     <div className='sign-up-title'>
-                        <h1> Sign up page </h1>
+                        <h1 className='App-title-2'>Sign up to <span className='pes'>Pes</span><span className='buk'>Buk</span></h1>
                     </div>
 
                     <div className='sign-up-form-container'>

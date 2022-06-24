@@ -12,7 +12,7 @@
 .sub-main {
     display: flex;
     justify-content: center;
-    height: 550px;
+    height: 620px;
     width: 35%;
     box-shadow: 0px 0px 15px 12px rgba(0, 0, 0, 40%);
     padding: 50px 0;
@@ -22,11 +22,11 @@
 
 h1, h2, h3 {
     font-family: 'Mulish', Arial, Helvetica, sans-serif;
-    font-size: 700;
+    font-weight: 700;
 }
 
-h1 {
-    font-size: 22px;
+.welcome {
+    font-size: 40px;
     margin: 0%;
 }
 
@@ -40,11 +40,11 @@ h2 {
     margin: 10px 0;
 }
 
-h3 {
+.email-text, .password-text {
     margin: 0px;
     padding: 5px 0;
-    font-size: 25px;
-    font-size: medium;
+    font-size: 20px;
+    font-weight: medium;
 }
 
 .imgs {
@@ -69,8 +69,8 @@ h3 {
     border-radius: 130px;
 } 
 
-input {
-    width: 300px;
+.login-name {
+    width: 350px;
     height: 50px;
     border-radius: 60px;
     box-shadow: inset 0px 0px 25px 0px #888;
@@ -106,6 +106,7 @@ input {
 }
 
 .login-btn {
+    font-family: 'Mulish', Arial, Helvetica, sans-serif;
     width: 380px;
     height: 50px;
     border-radius: 60px;
@@ -121,7 +122,6 @@ input {
     background-color: rgb(54, 121, 255);
     color: #dfdfdf;
     border: 2px solid #ffffff;
-    
     font-size: 25px;
     font-weight: 500;
 }

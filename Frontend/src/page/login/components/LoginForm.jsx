@@ -40,10 +40,10 @@ const LoginForm = () => {
                     },
                 }    
             )
-            .then(function (response) {
-                console.log('axios', response);
-                localStorage.setItem("token", response.data.data.token);
-                console.log(response.data.data.token);
+            .then((response) => {
+                console.log("axios", response);
+                localStorage.setItem("token", response.data.token);
+                console.log(response.data.token);
                 window.location.href = "/dashboard";
             })
             .catch (function (error) {
@@ -55,7 +55,7 @@ const LoginForm = () => {
         <div className='main'>
             <div className='sub-main'>
                 <div>
-                    <h1>Welcome Back <span><img src={readingIcon} alt="reading icon"></img></span></h1>
+                    <h1 className='welcome'>Welcome Back <span><img src={readingIcon} alt="reading icon"></img></span></h1>
                     <div className='imgs'>
                         <div className='container-image'>
                             <img src={userIcon} alt="profile" className="profile"/>
@@ -66,12 +66,12 @@ const LoginForm = () => {
                         <h2>Sign in page</h2>
                         <form onSubmit={handleSubmit}>
                             <div>
-                                <h3>Email</h3>
+                                <h3 className='email-text'>Email</h3>
                                 <img src={emailIcon} alt="email" className="email"/>
                                 <input type="text" placeholder="loremipsum@gmail.com" className="login-name" onChange={handleChange('email')}/>
                             </div>
                             <div className="second-input">
-                                <h3>Password</h3>
+                                <h3 className='password-text'>Password</h3>
                                 <img src={lockIcon} alt="pass" className="email"/>
                                 <input type="password" placeholder="password" className="login-name" onChange={handleChange('password')}/>
                             </div>
