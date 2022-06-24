@@ -1,0 +1,5 @@
+.signup-page {
+    background: rgb(69,255,222);
+    background: linear-gradient(90deg, rgba(69,255,222,0) 0%, rgba(69,255,222,1) 75%);
+    height: 800px;
+}

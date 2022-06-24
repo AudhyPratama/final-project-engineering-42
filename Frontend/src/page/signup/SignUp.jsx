@@ -1,5 +1,11 @@
+// MODULE
 import React from 'react';
+
+// COMPONENTS
 import SignUpForm from './components/SignUpForm';
+
+// CSS
+import './SignUp.css';
 
 const SignUp = () => {
     return (

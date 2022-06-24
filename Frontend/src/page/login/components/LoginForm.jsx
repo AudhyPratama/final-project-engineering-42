@@ -1,8 +1,9 @@
+// MODULE
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-// IMAGE IMPORTS
+// IMAGE
 import userIcon from '../../../asset/icons/user.png';
 import readingIcon from '../../../asset/icons/reading.png';
 import emailIcon from '../../../asset/icons/email.png';
@@ -67,12 +68,12 @@ const LoginForm = () => {
                             <div>
                                 <h3>Email</h3>
                                 <img src={emailIcon} alt="email" className="email"/>
-                                <input type="text" placeholder="loremipsum@gmail.com" className="name" onChange={handleChange('email')}/>
+                                <input type="text" placeholder="loremipsum@gmail.com" className="login-name" onChange={handleChange('email')}/>
                             </div>
                             <div className="second-input">
                                 <h3>Password</h3>
                                 <img src={lockIcon} alt="pass" className="email"/>
-                                <input type="password" placeholder="password" className="name" onChange={handleChange('password')}/>
+                                <input type="password" placeholder="password" className="login-name" onChange={handleChange('password')}/>
                             </div>
                             <div className="login-button">
                                 <button className="login-btn" type="submit" >Login</button>

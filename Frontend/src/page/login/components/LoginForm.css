@@ -4,7 +4,6 @@
     text-align: center;
     justify-content: center;
     display: flex; 
-    /* padding: 90px 0; */
     background-color: #fff;
     background: rgb(69,255,222);
     background: linear-gradient(90deg, rgba(69,255,222,0) 0%, rgba(69,255,222,0.15) 100%);
@@ -93,7 +92,7 @@ input {
     padding: 14px 0 0 25px;
 }
 
-.name {
+.login-name {
     padding-left: 70px;
     font-size: 20px;
 }

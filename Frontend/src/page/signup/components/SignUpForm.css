@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Oswald:wght@400;600&family=Pacifico&family=Poppins:ital,wght@0,400;0,700;1,600&family=Roboto:wght@400;700&display=swap');
+
+.sign-up-component {
+    padding-top: 80px;
+    text-align: center;
+    background-color: #fff;
+    justify-content: center;
+    display: flex;
+    background: rgb(69,255,222);
+    background: linear-gradient(90deg, rgba(69,255,222,0) 0%, rgba(69,255,222,0.15) 100%);
+    /* border: 3px solid #fff; */
+}
+
+.sign-up-container {
+    display: flex;
+    justify-content: center;
+    height: 550px;
+    width: 35%;
+    box-shadow: 0px 0px 15px 12px rgba(0, 0, 0, 40%);
+    padding: 50px 0;
+    border-radius: 15px; 
+    background-color: white;
+}
+
+.email {
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    padding: 14px 0 0 25px;
+}
+
+.sign-up-form img {
+    width: 25px;
+    height: 25px;
+}
+
+.signup-h1, h2, h3 {
+    font-family: 'Mulish', Arial, Helvetica, sans-serif;
+}
+
+.back a{
+    margin-right: 400px;
+}
+
+input .signup-name{
+    width: 300px;
+    height: 50px;
+    border-radius: 60px;
+    box-shadow: inset 0px 0px 25px 0px #888;
+    border: none;
+    outline: none;
+    background-color: #fff;
+}
+
+.signup-name {
+    padding-left: 70px;
+    font-size: 20px;
+}
+
+.signup-name::placeholder{
+    font-family: 'Mulish', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.sign-in-btn {
+    width: 380px;
+    height: 50px;
+    border-radius: 60px;
+    background-color: #283EFF;
+    border-radius: 2px solid #fff;
+    color: white;
+    font-size: 25px;
+    font-weight: 500;
+    border: none;
+}
+
+.sign-in-btn:hover {
+    background-color: rgb(54, 121, 255);
+    color: #dfdfdf;
+    border: 2px solid #ffffff;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.sign-in-btn:active {
+    border: 2px solid #283EFF;
+    background-color: #fff;
+    color: #283EFF;
+}
