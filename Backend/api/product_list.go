@@ -11,15 +11,16 @@ type BookListErrorResponse struct {
 }
 
 type Book struct {
-	Name         string  `json:"name"`
-	Penulis      string  `json:"penulis"`
-	Penerbit     string  `json:"penerbit"`
-	CategoryName string  `json:"category_name"`
-	Kondisi      string  `json:"kondisi"`
-	Berat        string  `json:"berat"`
-	Stock        int64   `json:"stock"`
-	Harga        float64 `json:"harga"`
-	Deskripsi    string  `json:"deskripsi"`
+	ID           int64  `json:"id"`
+	Name         string `json:"name"`
+	Penulis      string `json:"penulis"`
+	Penerbit     string `json:"penerbit"`
+	CategoryName string `json:"category_name"`
+	Kondisi      string `json:"kondisi"`
+	Berat        string `json:"berat"`
+	Stock        int64  `json:"stock"`
+	Harga        int64  `json:"harga"`
+	Deskripsi    string `json:"deskripsi"`
 }
 
 type BookListSuccessResponse struct {
@@ -51,6 +52,7 @@ func (api *API) booktList(w http.ResponseWriter, req *http.Request) {
 
 	for _, book := range books {
 		response.Books = append(response.Books, Book{
+			ID:           book.ID,
 			CategoryName: book.CategoryName,
 			Name:         book.BookName,
 			Penulis:      book.Penulis,
@@ -87,7 +89,6 @@ func (api *API) getBook(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// jika request tidak sama dengan yang ada di database, maka akan menampilkan error
 	if len(books) == 0 {
 		w.WriteHeader(http.StatusBadRequest)
 		encoder.Encode(BookListErrorResponse{Error: "Book not found"})

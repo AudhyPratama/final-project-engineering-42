@@ -19,15 +19,16 @@ func (c *CartRepository) FetchCarts() ([]OrderCart, error) {
 
 	sqlStatement = `
 	SELECT
-		o.id,
-		o.book_id,
+		o.order_id,
 		o.quantity,
 		b.book_name,
 		b.penulis,
+		c.name as category_name,
 		b.penerbit,
 		b.harga
 	FROM orders o
-	INNER JOIN books b ON o.book_id = b.id`
+	INNER JOIN books b ON o.book_id = b.id
+	INNER JOIN categories c ON b.categori_id = c.id`
 
 	rows, err := c.db.Query(sqlStatement)
 	if err != nil {
@@ -39,11 +40,11 @@ func (c *CartRepository) FetchCarts() ([]OrderCart, error) {
 	for rows.Next() {
 		var cart OrderCart
 		err := rows.Scan(
-			&cart.ID,
-			&cart.BookID,
+			&cart.OrderID,
 			&cart.Quantity,
 			&cart.BookName,
 			&cart.Penulis,
+			&cart.CategoryName,
 			&cart.Penerbit,
 			&cart.Harga)
 		if err != nil {
@@ -55,13 +56,12 @@ func (c *CartRepository) FetchCarts() ([]OrderCart, error) {
 	return carts, nil
 }
 
-func (c *CartRepository) FetchCartByID(BookID int64) (OrderCart, error) {
+func (c *CartRepository) FetchCartByID(order_id int64) (OrderCart, error) {
 	var orderCart OrderCart
-	var sqlStatement string
 
-	sqlStatement = `
+	sqlStatement := `
 	SELECT
-		o.id,
+		o.order_id,
 		o.book_id,
 		o.quantity,
 		b.book_name,
@@ -72,9 +72,9 @@ func (c *CartRepository) FetchCartByID(BookID int64) (OrderCart, error) {
 	INNER JOIN books b ON o.book_id = b.id
 	WHERE o.id = ?`
 
-	row := c.db.QueryRow(sqlStatement, BookID)
+	row := c.db.QueryRow(sqlStatement, order_id)
 	err := row.Scan(
-		&orderCart.ID,
+		&orderCart.OrderID,
 		&orderCart.BookID,
 		&orderCart.Quantity,
 		&orderCart.BookName,
@@ -89,12 +89,11 @@ func (c *CartRepository) FetchCartByID(BookID int64) (OrderCart, error) {
 
 }
 
-func (c *CartRepository) InserCart(cart OrderCart) error {
-	var sqlStatement string
+func (c *CartRepository) InsertToCart(cart OrderCart) error {
 
-	sqlStatement = `INSERT INTO orders (book_id, quantity) VALUES (?, ?)`
+	sqlStatement := `INSERT INTO orders (order_id, book_id, quantity) VALUES (?, ?, ?)`
 
-	_, err := c.db.Exec(sqlStatement, cart.BookID, cart.Quantity)
+	_, err := c.db.Exec(sqlStatement, cart.OrderID, cart.BookID, cart.Quantity)
 	if err != nil {
 		return err
 	}
@@ -103,11 +102,10 @@ func (c *CartRepository) InserCart(cart OrderCart) error {
 }
 
 func (c *CartRepository) UpdateCart(cart OrderCart) error {
-	var sqlStatement string
 
-	sqlStatement = `UPDATE orders SET quantity = quantity + ? WHERE book_id = ?`
+	sqlStatement := `UPDATE orders SET quantity = quantity + ? WHERE book_id = ?`
 
-	_, err := c.db.Exec(sqlStatement, cart.Quantity, cart.ID)
+	_, err := c.db.Exec(sqlStatement, cart.Quantity, cart.OrderID)
 	if err != nil {
 		return err
 	}
@@ -116,9 +114,8 @@ func (c *CartRepository) UpdateCart(cart OrderCart) error {
 }
 
 func (c *CartRepository) ResetCart() error {
-	var sqlStatement string
 
-	sqlStatement = `DELETE FROM orders`
+	sqlStatement := `DELETE FROM orders`
 
 	_, err := c.db.Exec(sqlStatement)
 	if err != nil {
@@ -128,10 +125,21 @@ func (c *CartRepository) ResetCart() error {
 	return nil
 }
 
-func (c *CartRepository) TotalPrice() (int, error) {
-	var sqlStatement string
+func (c *CartRepository) DeleteCart(order_id int64) error {
 
-	sqlStatement = `SELECT SUM(b.harga * o.quantity) FROM orders o INNER JOIN books b ON o.book_id = b.id`
+	sqlStatement := `DELETE FROM orders WHERE order_id = ?`
+
+	_, err := c.db.Exec(sqlStatement, order_id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (c *CartRepository) TotalPrice() (int, error) {
+
+	sqlStatement := `SELECT SUM(b.harga * o.quantity) FROM orders o INNER JOIN books b ON o.book_id = b.id`
 
 	var totalPrice int
 	err := c.db.QueryRow(sqlStatement).Scan(&totalPrice)

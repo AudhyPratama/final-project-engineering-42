@@ -21,12 +21,13 @@ func NewAPI(userRepo repository.UserRepository, bookRepo repository.BookReposito
 
 	mux.Handle("/api/user/login", api.POST(http.HandlerFunc(api.login)))
 	mux.Handle("/api/user/logout", api.POST(http.HandlerFunc(api.logout)))
-	mux.Handle("/api/signup", api.POST(http.HandlerFunc(api.signup)))
+	mux.Handle("/api/register", api.POST(http.HandlerFunc(api.signup)))
 
 	mux.Handle("/api/products", api.GET(http.HandlerFunc(api.booktList)))
 	mux.Handle("/api/book", api.GET(http.HandlerFunc(api.getBook)))
-	mux.Handle("/api/carts", api.GET(http.HandlerFunc(api.cartlist)))
-	mux.Handle("/api/cart/clear", api.GET(http.HandlerFunc(api.clearCart)))
+	mux.Handle("/api/cart/add", api.POST(http.HandlerFunc(api.addToCart)))
+	mux.Handle("/api/carts", api.GET(http.HandlerFunc(api.getCart)))
+	mux.Handle("/api/cart/delete", api.GET(http.HandlerFunc(api.deleteAllCart)))
 
 	return api
 }
