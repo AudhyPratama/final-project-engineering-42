@@ -66,13 +66,13 @@ const LoginForm = () => {
                         <h2>Sign in page</h2>
                         <form onSubmit={handleSubmit}>
                             <div>
-                                <h3 className='email-text'>Email</h3>
-                                <img src={emailIcon} alt="email" className="email"/>
+                                <h3 className='email-sign-in-text'>Email</h3>
+                                <img src={emailIcon} alt="email" className="email-sign-in-icon"/>
                                 <input type="text" placeholder="loremipsum@gmail.com" className="login-name" onChange={handleChange('email')}/>
                             </div>
                             <div className="second-input">
-                                <h3 className='password-text'>Password</h3>
-                                <img src={lockIcon} alt="pass" className="email"/>
+                                <h3 className='password-sign-in-text'>Password</h3>
+                                <img src={lockIcon} alt="pass" className="password-sign-in-icon"/>
                                 <input type="password" placeholder="password" className="login-name" onChange={handleChange('password')}/>
                             </div>
                             <div className="login-button">

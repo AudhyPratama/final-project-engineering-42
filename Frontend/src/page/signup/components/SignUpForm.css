@@ -14,19 +14,57 @@
 .sign-up-container {
     display: flex;
     justify-content: center;
-    height: 550px;
+    height: 650px;
     width: 35%;
     box-shadow: 0px 0px 15px 12px rgba(0, 0, 0, 40%);
     padding: 50px 0;
     border-radius: 15px; 
-    background-color: white;
+    background-color: rgb(239, 239, 239);
 }
 
-.user-icon, .email-icon, .password-icon {
-    height: 25px;
+.back {
+    margin-bottom: 20px;
+}
+
+.back a {
+    text-decoration: none;
+    font-family: 'Mulish', Arial, Helvetica, sans-serif;
+    color: #283EFF;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.back-link span{
+    margin-left: 5px;
+}
+
+.back .back-icon {
     width: 25px;
+    height: 25px;
+}
+
+div img.sign-up-user-icon {
+    height: 35px;
+    width: 35px;
     position: absolute;
-    padding: 14px 0 0 25px;
+    margin: 13px 0 0 15px;
+    z-index: 3;
+}
+
+div img.sign-up-email-icon {
+    height: 35px;
+    width: 35px;
+    position: absolute;
+    margin: 13px 0 0 15px;
+    z-index: 5;
+}
+
+div img.sign-up-password-icon{
+    height: 35px;
+    width: 35px;
+    position: absolute;
+    margin: 13px 0 0 15px;
+    z-index: 4;
 }
 
 .sign-up-form img {
@@ -40,6 +78,13 @@
 
 .sign-up-title h1 {
     font-size: 40px;
+}
+
+div .username-sign-up-text, .email-sign-up-text, .password-sign-up-text {
+    margin: 0px;
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: medium;
 }
 
 .back a{
@@ -64,18 +109,25 @@ h1 .pes, .buk{
 
 /* Buk */
 h1 .buk{
-    color: blue;
+    color: #283EFF;
     -webkit-text-stroke: 2px solid rgba(255, 255, 255, 100%);
 }
 
-input .signup-name{
-    width: 300px;
+.sign-up-form-container {
+    border: 2px solid #B0B0B0;
+    border-radius: 15px;
+    background-color: #FFF;
+}
+
+div .signup-name{
+    width: 350px;
     height: 50px;
     border-radius: 60px;
     box-shadow: inset 0px 0px 25px 0px #888;
     border: none;
     outline: none;
     background-color: #fff;
+    margin: 5px 0;
 }
 
 .signup-name {
@@ -99,6 +151,8 @@ input .signup-name{
     font-size: 25px;
     font-weight: 500;
     border: none;
+    padding: 0;
+    margin: 30px 0;
 }
 
 .sign-in-btn:hover {
