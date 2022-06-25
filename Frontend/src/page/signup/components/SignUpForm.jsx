@@ -63,7 +63,7 @@ const SignUpForm = () => {
                                 <img src={lockIcon} alt="password icon" className='sign-up-password-icon' />
                                 <input type="password" placeholder="Password" className="signup-name" /*onChange={handleChange('password')}*//>
                             </div>
-                            <div className="sign-in-button">
+                            <div className="sign-up-button">
                                 <button className="sign-in-btn" type="submit" >Signup</button>
                             </div>
                         </form>

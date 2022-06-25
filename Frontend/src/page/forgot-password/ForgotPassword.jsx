@@ -2,7 +2,7 @@
 import React from 'react';
 
 // COMPONENTS
-import ForgotPasswordComponent from './components/ForgotPasswordComponent';
+import ForgotPasswordForm from './components/ForgotPasswordForm';
 
 // CSS
 import './ForgotPassword.css';
@@ -10,7 +10,7 @@ import './ForgotPassword.css';
 const ForgotPassword = () => {
     return (
         <div className='forgot-password-page'>
-            <ForgotPasswordComponent/>
+            <ForgotPasswordForm/>
         </div>
     );
 }

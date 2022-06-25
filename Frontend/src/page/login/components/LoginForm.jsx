@@ -80,7 +80,23 @@ const LoginForm = () => {
                             </div>
                         </form>
                         <div className="link">
-                            <a href="/forgot-password" onClick={() => navigate('/forgot-password')}>Forgot password ?</a> Or <a href="/sign-up" onClick={() => navigate('/sign-up')}>Sign Up</a>
+                            <a 
+                                className='link-forgot-pw' 
+                                href="/forgot-password" 
+                                onClick={() => 
+                                    navigate('/forgot-password')
+                            }>
+                                Forgot password ?
+                            </a> Or 
+                            <a 
+                                className='link-sign-up' 
+                                href="/sign-up" 
+                                onClick={() => 
+                                    navigate('/sign-up')
+                                }
+                            >
+                                Sign Up
+                            </a>
                         </div>
                     </div>
                 </div>
