@@ -1,6 +1,7 @@
 // MODULE
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // IMAGE
 import userIcon from '../../../asset/icons/user-white.png';
