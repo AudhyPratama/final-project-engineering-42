@@ -1,0 +1,55 @@
+body{
+  background:#ffffff;
+  margin: 0; 
+}
+
+.btn-form-batal{
+  color:white;
+  background: #ff6868;
+  font-weight: bold;
+  border:none;
+  border-radius:30px;
+  padding:10px;
+  margin:7px;
+  width: 15%;
+  float:right;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.btn-form-bayar{
+  color:white;
+  background: #07ccbc;
+  font-weight: bold;
+  border:none;
+  border-radius:30px;
+  padding:10px;
+  margin:5px;
+  width: 15%;
+  float:right;
+  cursor: pointer;
+}
+.btn-form-bayar:hover{
+  background:#6cb8eb;
+}
+.btn-form-batal:hover{
+  background: #f72c2c;
+}
+table {
+    margin-top: 5px;
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #ddd;
+}
+
+th, td {
+    background: white;
+}
+
+th:hover {
+  box-shadow:2px 0px 10px 0px #F4F4F4;
+  border: 1px solid #68a2ff;
+}
+th{
+  border: 1px solid #F4F4F4;
+}
+
