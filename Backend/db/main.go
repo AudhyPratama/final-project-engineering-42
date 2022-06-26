@@ -50,18 +50,31 @@ func main() {
 		stock integer not null,
 		harga integer not null,
 		deskripsi text,
+		image varchar(100) not null,
 		FOREIGN KEY (categori_id) REFERENCES categories(id)
 	);
 
-	INSERT INTO books (id, categori_id, book_name, penulis, penerbit, kondisi, berat, stock, harga, deskripsi) VALUES
+	INSERT INTO books (id, categori_id, book_name, penulis, penerbit, kondisi, berat, stock, harga, deskripsi, image) VALUES
 		(071235, 965321, "How To Win An Argument", "Marcus Tullius Cicero", "Kepustakaan Populer Gramedia", "baru", "525 Gram", 50, 100000, 
-		" Lorem ipsum dolor sit amet, consectetur adipiscing elit"),
+		"Marcus Tullius Cicero, sejak kecil terlatih dalam seluk-beluk retorika. Cicero unggul bukan hanya sebagai 
+		pembicara publik yang efektif, melainkan juga sebagai teoretikus seni persuasi lisan yang menghasilkan 
+		risalah-risalah bertema retorika.", 
+		"https://cf.shopee.co.id/file/561e88051cd120db6ed574ec9b822c75"),
 		(071236, 965323, "Covid 19: Seluk Beluk Corona Virus", "Prof.Dr.dr.Anies, M.Kes, PKK", "Ar-ruzz Media", "baru", "350 Gram", 13, 40000,
-		"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+		"Buku ini mengajak para pembaca sekalian untuk mengetahui segala seluk-beluk tentang COVID-19. Selain pemaparan 
+		sejarah virus corona yang ditemukan pada 1960-an, Anda akan diajak untuk mengetahui cara  sederhana agar terhindar 
+		dari infeksi COVID-19.", 
+		"https://cf.shopee.co.id/file/358a4e2b0b46ddc13aeec03ab566bc87"),
 		(071237, 965326, "Filsafat Sosial", "Hans Fink", "Pustaka Pelajar", "baru", "200 Gram", 78, 30500,
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit"),
+		"Buku filsafat sosial ini menyajikan ulasan tentang beberapa sistem filsafat sosial yang amat berpengaruh, yang dijadikan 
+		sebagai titik-tolak bagi orientasi diskusi modern. Paparan atas berbagai tahap dalam sejarah filsafat sosial dikemukakan 
+		dalam kaitannya dengan pembahasan tentang lingkungan sosial yang berubah.",
+		"https://cf.shopee.co.id/file/e40fdd4fab9f5460b08a8159eaded544"),
 		(071238, 965325, "Jatuh Bangun Jadi Pengusaha", "Ervina Pitasari", "Checklist", "baru", "350 Gram", 15, 55500,
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit");
+		"Buku ini menorehkan sejumlah kisah hidup para pengusaha yang luar biasa dalam memulai dan mengembangkan usahanya. 
+		Dari kisah hidup inilah, kita dapat memetik banyak pelajaran berharga, salah satunya yaitu tidak ada kata “menyerah” 
+		jika ingin sukses.",
+		"https://cf.shopee.co.id/file/9a97c6bf91f6ab605cefc0e88a92921d");
 	
 	CREATE TABLE IF NOT EXISTS orders (
 		order_id integer not null primary key AUTOINCREMENT,

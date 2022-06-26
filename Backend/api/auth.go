@@ -9,7 +9,7 @@ import (
 )
 
 type User struct {
-	ID       int64  `json:"id"`
+	ID       int    `json:"id"`
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
@@ -24,11 +24,23 @@ type AuthErrorResponse struct {
 	Error string `json:"error"`
 }
 
+type Profile struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+	Role     string `json:"role"`
+}
+type ProfileSuccessResponse struct {
+	Profil []Profile `json:"profile"`
+}
+
 var jwtKey = []byte("secret")
 
 type Claims struct {
-	Email string
-	Role  string
+	Name     string `json:"name"`
+	Email    string
+	Password string `json:"password"`
+	Role     string
 	jwt.StandardClaims
 }
 
@@ -38,6 +50,8 @@ func (api *API) signup(w http.ResponseWriter, req *http.Request) {
 	err := json.NewDecoder(req.Body).Decode(&user)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
+		encoder := json.NewEncoder(w)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
 		return
 	}
 
@@ -153,4 +167,124 @@ func (api *API) logout(w http.ResponseWriter, req *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("logged out"))
+}
+
+func (api *API) updatePassword(w http.ResponseWriter, req *http.Request) {
+	api.AllowOrigin(w, req)
+	var user User
+	err := json.NewDecoder(req.Body).Decode(&user)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	res, err := api.userRepo.FetchUsersByEmail(user.Email)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if len(res) == 0 {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Email not found"))
+		return
+	}
+
+	err = api.userRepo.UpdatePassword(user.Email, user.Password)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Update password failed"))
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Password updated successfully"))
+}
+
+func (api *API) profile(w http.ResponseWriter, req *http.Request) {
+	api.AllowOrigin(w, req)
+	token, err := req.Cookie("token")
+	encoder := json.NewEncoder(w)
+	if err != nil {
+		if err == http.ErrNoCookie {
+			// return unauthorized ketika token kosong
+			w.WriteHeader(http.StatusUnauthorized)
+			encoder.Encode(AuthErrorResponse{Error: err.Error()})
+			return
+		}
+		// return bad request ketika field token tidak ada
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tokenString := token.Value
+	claims := &Claims{}
+	tkn, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+
+	if !tkn.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
+
+	profiles, err := api.userRepo.GetProfile(claims.Email)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
+
+	encoder.Encode(profiles)
+
+}
+
+// cara membuat update profile
+func (api *API) updateProfile(w http.ResponseWriter, req *http.Request) {
+	api.AllowOrigin(w, req)
+	token, err := req.Cookie("token")
+	encoder := json.NewEncoder(w)
+	if err != nil {
+		if err == http.ErrNoCookie {
+			// return unauthorized ketika token kosong
+			w.WriteHeader(http.StatusUnauthorized)
+			encoder.Encode(AuthErrorResponse{Error: err.Error()})
+			return
+		}
+		// return bad request ketika field token tidak ada
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tokenString := token.Value
+	claims := &Claims{}
+	tkn, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+
+	if !tkn.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
+
+	profiles, err := api.userRepo.GetProfile(claims.Email)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
+
+	encoder.Encode(profiles)
 }

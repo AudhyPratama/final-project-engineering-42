@@ -14,48 +14,53 @@ import './LoginForm.css';
 
 const LoginForm = () => { 
     const [state, setState] = useState({
-        email: '',
-        password: ''
+        email: "",
+        password: ""
     });
 
     const handleChange = (prop) => (event) => {
-        setState({ ...state, [prop]: event.target.state });
+        setState({ ...state, [prop]: event.target.value });
     };
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         // console.log(values);
-        await axios
+        console.log(state);
+
+        axios
             .post(
-                'http://localhost:8080/api/user/login',
+                "http://localhost:8080/api/login",
                 {
                     email: state.email,
                     password: state.password,
                 },
                 {
                     Headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                     },
                 }    
             )
-            .then(function (response) {
-                console.log('axios', response);
-                localStorage.setItem("token", response.data.data.token);
-                console.log(response.data.data.token);
+            .then((response) => {
+                console.log("axios", response);
+                localStorage.setItem("token", response.data.token);
+                console.log(response.data.token);
                 window.location.href = "/dashboard";
             })
             .catch (function (error) {
                 console.log(error);
-            })
-    }
+            });
+    };
+
+
+
 
     return (
         <div className='main'>
             <div className='sub-main'>
                 <div>
-                    <h1>Welcome Back <span><img src={readingIcon} alt="reading icon"></img></span></h1>
+                    <h1 className='welcome'>Welcome Back <span><img src={readingIcon} alt="reading icon"></img></span></h1>
                     <div className='imgs'>
                         <div className='container-image'>
                             <img src={userIcon} alt="profile" className="profile"/>
@@ -66,13 +71,13 @@ const LoginForm = () => {
                         <h2>Sign in page</h2>
                         <form onSubmit={handleSubmit}>
                             <div>
-                                <h3>Email</h3>
-                                <img src={emailIcon} alt="email" className="email"/>
+                                <h3 className='email-sign-in-text'>Email</h3>
+                                <img src={emailIcon} alt="email" className="email-sign-in-icon"/>
                                 <input type="text" placeholder="loremipsum@gmail.com" className="login-name" onChange={handleChange('email')}/>
                             </div>
                             <div className="second-input">
-                                <h3>Password</h3>
-                                <img src={lockIcon} alt="pass" className="email"/>
+                                <h3 className='password-sign-in-text'>Password</h3>
+                                <img src={lockIcon} alt="pass" className="password-sign-in-icon"/>
                                 <input type="password" placeholder="password" className="login-name" onChange={handleChange('password')}/>
                             </div>
                             <div className="login-button">
@@ -80,7 +85,23 @@ const LoginForm = () => {
                             </div>
                         </form>
                         <div className="link">
-                            <a href="/forgot-password" onClick={() => navigate('/forgot-password')}>Forgot password ?</a> Or <a href="/sign-up" onClick={() => navigate('/sign-up')}>Sign Up</a>
+                            <a 
+                                className='link-forgot-pw' 
+                                href="/forgot-password" 
+                                onClick={() => 
+                                    navigate('/forgot-password')
+                            }>
+                                Forgot password ?
+                            </a> Or 
+                            <a 
+                                className='link-sign-up' 
+                                href="/sign-up" 
+                                onClick={() => 
+                                    navigate('/sign-up')
+                                }
+                            >
+                                Sign Up
+                            </a>
                         </div>
                     </div>
                 </div>

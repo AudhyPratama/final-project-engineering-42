@@ -1,48 +1,36 @@
 package api
 
 import (
+	"backend/repository"
 	"encoding/json"
 	"net/http"
 )
-
-type Cart struct {
-	OrderID      int64  `json:"order_id"`
-	BookName     string `json:"book_name"`
-	CategoryName string `json:"category_name"`
-	Penulis      string `json:"penulis"`
-	Penerbit     string `json:"penerbit"`
-	Quantity     int64  `json:"quantity"`
-	Harga        int64  `json:"harga"`
-}
 
 type CartErrorResponse struct {
 	Error string `json:"error"`
 }
 
 type AddToCartResponse struct {
-	BookName string `json:"book_name"`
-	Penulis  string `json:"penulis"`
-	Penerbit string `json:"penerbit"`
-	Harga    int64  `json:"harga"`
+	BookName     string `json:"book_name"`
+	CategoryName string `json:"category_name"`
+	Penulis      string `json:"penulis"`
 }
 
 type AddtoCartRequest struct {
 	BookName string `json:"book_name"`
 }
-
+type Cart struct {
+	OrderID int `json:"order_id"`
+}
 type CartResponse struct {
-	Carts []Cart `json:"carts"`
+	Carts []repository.OrderCart `json:"carts"`
 }
 
-type AddToCartListResponse struct {
-	Cart []AddToCartResponse `json:"cart"`
-}
-
-func (api *API) addToCart(w http.ResponseWriter, r *http.Request) {
-	api.AllowOrigin(w, r)
+func (api *API) insertToCart(w http.ResponseWriter, req *http.Request) {
+	api.AllowOrigin(w, req)
 
 	var request AddtoCartRequest
-	err := json.NewDecoder(r.Body).Decode(&request)
+	err := json.NewDecoder(req.Body).Decode(&request)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
@@ -52,80 +40,60 @@ func (api *API) addToCart(w http.ResponseWriter, r *http.Request) {
 
 	book, err := api.bookRepo.FetchBooksByName(request.BookName)
 	if err != nil {
-		w.WriteHeader(http.StatusNotFound)
-		encoder.Encode(CartErrorResponse{Error: "Book not found"})
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(CartErrorResponse{Error: err.Error()})
 		return
 	}
 
-	cart, err := api.cartRepo.FetchCartByID(book.ID)
-	if err != nil && cart.OrderID != 0 {
-		err := api.cartRepo.UpdateCart(cart)
+	carts, err := api.cartRepo.FetchCartByBookID(book.ID)
+	if err == nil && carts.OrderID != 0 {
+		err = api.cartRepo.UpdateCart(carts)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			encoder.Encode(CartErrorResponse{Error: "Failed to update cart"})
+			w.WriteHeader(http.StatusBadRequest)
+			encoder.Encode(CartErrorResponse{Error: err.Error()})
 			return
 		}
 
 		w.WriteHeader(http.StatusOK)
 		encoder.Encode(AddToCartResponse{
-			BookName: book.BookName,
-			Penulis:  book.Penulis,
-			Penerbit: book.Penerbit,
-			Harga:    book.Harga,
+			BookName:     book.BookName,
+			CategoryName: book.CategoryName,
+			Penulis:      book.Penulis,
 		})
 		return
 	}
 
-	err = api.cartRepo.InsertToCart(cart)
+	err = api.cartRepo.InsertToCart(repository.OrderCart{
+		BookID:   book.ID,
+		Quantity: 1,
+	})
+
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		encoder.Encode(CartErrorResponse{Error: "Failed to insert to cart"})
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(CartErrorResponse{Error: err.Error()})
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
 	encoder.Encode(AddToCartResponse{
-		BookName: book.BookName,
-		Penulis:  book.Penulis,
-		Penerbit: book.Penerbit,
-		Harga:    book.Harga,
+		BookName:     book.BookName,
+		CategoryName: book.CategoryName,
+		Penulis:      book.Penulis,
 	})
 }
 
 func (api *API) getCart(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
+	orderCart, err := api.cartRepo.FetchCarts()
 	encoder := json.NewEncoder(w)
-
-	response := CartResponse{}
-	response.Carts = make([]Cart, 0)
-
-	carts, err := api.cartRepo.FetchCarts()
 	defer func() {
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			w.WriteHeader(http.StatusBadRequest)
 			encoder.Encode(CartErrorResponse{Error: err.Error()})
-			return
 		}
 	}()
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		encoder.Encode(CartErrorResponse{Error: err.Error()})
-		return
-	}
 
-	for _, cart := range carts {
-		response.Carts = append(response.Carts, Cart{
-			OrderID:      cart.OrderID,
-			BookName:     cart.BookName,
-			CategoryName: cart.CategoryName,
-			Penulis:      cart.Penulis,
-			Penerbit:     cart.Penerbit,
-			Quantity:     cart.Quantity,
-			Harga:        cart.Quantity * cart.Harga,
-		})
-	}
-
-	encoder.Encode(response)
+	encoder.Encode(CartResponse{Carts: orderCart})
 }
 
 func (api *API) deleteAllCart(w http.ResponseWriter, r *http.Request) {
@@ -139,4 +107,28 @@ func (api *API) deleteAllCart(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Delete All Success"))
+}
+
+func (api *API) deleteCart(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+
+	var cart Cart
+	err := json.NewDecoder(r.Body).Decode(&cart)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder := json.NewEncoder(w)
+		encoder.Encode(BookListErrorResponse{Error: err.Error()})
+		return
+	}
+
+	encoder := json.NewEncoder(w)
+	err = api.cartRepo.DeleteCart(cart.OrderID)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(BookListErrorResponse{Error: err.Error()})
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Delete Book in Cart Success"))
 }

@@ -14,9 +14,8 @@ func NewBookRepository(db *sql.DB) *BookRepository {
 }
 
 func (b *BookRepository) FetchBooks() ([]*Book, error) {
-	var sqlStatement string
 
-	sqlStatement = `
+	sqlStatement := `
 	SELECT
 		b.id,
 		b.categori_id,
@@ -28,7 +27,8 @@ func (b *BookRepository) FetchBooks() ([]*Book, error) {
 		b.berat,
 		b.stock,
 		b.harga,
-		b.deskripsi
+		b.deskripsi,
+		b.image
 	FROM books b
 	LEFT JOIN categories c ON b.categori_id = c.id`
 
@@ -52,7 +52,8 @@ func (b *BookRepository) FetchBooks() ([]*Book, error) {
 			&book.Berat,
 			&book.Stock,
 			&book.Harga,
-			&book.Deskripsi)
+			&book.Deskripsi,
+			&book.Image)
 		if err != nil {
 			return nil, err
 		}
@@ -98,7 +99,8 @@ func (b *BookRepository) FetchDetailBook(request GetBookRequest) ([]Book, error)
 		b.berat,
 		b.stock,
 		b.harga,
-		b.deskripsi
+		b.deskripsi,
+		b.image
 	 FROM books b
 	 INNER JOIN categories c ON b.categori_id = c.id
 	 WHERE book_name LIKE '%` + request.BookName + `%'`
@@ -139,7 +141,8 @@ func (b *BookRepository) FetchDetailBook(request GetBookRequest) ([]Book, error)
 			&book.Berat,
 			&book.Stock,
 			&book.Harga,
-			&book.Deskripsi)
+			&book.Deskripsi,
+			&book.Image)
 		// &book.CategoryName)
 		if err != nil {
 			return nil, err
@@ -148,4 +151,34 @@ func (b *BookRepository) FetchDetailBook(request GetBookRequest) ([]Book, error)
 	}
 
 	return books, nil
+}
+
+func (b *BookRepository) InsertBook(categori_id int, book_name string, penulis string, penerbit string, kondisi string, berat string, stock int, harga int, deskripsi string, image string) error {
+	sqlStatement := `INSERT INTO books (categori_id, book_name, penulis, penerbit, kondisi, berat, stock, harga, deskripsi, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+	_, err := b.db.Exec(sqlStatement, categori_id, book_name, penulis, penerbit, kondisi, berat, stock, harga, deskripsi, image)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (b *BookRepository) UpdateBook(id int, categori_id int, book_name string, penulis string, penerbit string, kondisi string, berat string, stock int, harga int, deskripsi string, image string) error {
+	sqlStatement := `UPDATE books SET categori_id = ?, book_name = ?, penulis = ?, penerbit = ?, kondisi = ?, berat = ?, stock = ?, harga = ?, deskripsi = ?, image = ? WHERE id = ?`
+	_, err := b.db.Exec(sqlStatement, categori_id, book_name, penulis, penerbit, kondisi, berat, stock, harga, deskripsi, image, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (b *BookRepository) DeleteBook(id int) error {
+	sqlStatement := `DELETE FROM books WHERE id = ?`
+	_, err := b.db.Exec(sqlStatement, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

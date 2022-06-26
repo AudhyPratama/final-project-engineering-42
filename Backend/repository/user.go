@@ -42,7 +42,7 @@ func (u *UserRepository) FetchUsersByEmail(email string) (string, error) {
 
 	err := u.db.QueryRow(`SELECT email FROM users WHERE email = ?`, email).Scan(&user.Email)
 	if err != nil {
-		return "", errors.New("email not found")
+		return "", errors.New("user not found")
 	}
 	return user.Email, nil
 }
@@ -74,7 +74,7 @@ func (u *UserRepository) FetchUserRole(email string) (*string, error) {
 
 	err := u.db.QueryRow(`SELECT role FROM users WHERE email = ?`, email).Scan(&user.Role)
 	if err != nil {
-		return nil, errors.New("role not found")
+		return nil, errors.New("user not found")
 	}
 	return &user.Role, nil
 }
@@ -82,4 +82,37 @@ func (u *UserRepository) FetchUserRole(email string) (*string, error) {
 func (u *UserRepository) Valid(email string) bool {
 	_, err := mail.ParseAddress(email)
 	return err == nil
+}
+
+func (u *UserRepository) UpdateUser(email string, name string, password string) (Profile, error) {
+	var user Profile
+
+	_, err := u.db.Exec(`UPDATE users SET name = ?, password = ? WHERE email = ?`, name, password, email)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
+
+func (u *UserRepository) UpdatePassword(email string, password string) error {
+	_, err := u.db.Exec(`UPDATE users SET password = ? WHERE email = ?`, password, email)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (u *UserRepository) GetProfile(email string) (Profile, error) {
+	var user Profile
+
+	err := u.db.QueryRow(`SELECT name, email, password, role FROM users WHERE email = ?`, email).Scan(
+		&user.Name,
+		&user.Email,
+		&user.Password,
+		&user.Role,
+	)
+	if err != nil {
+		return user, errors.New("profile not found")
+	}
+	return user, nil
 }
