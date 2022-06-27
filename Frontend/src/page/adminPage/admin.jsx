@@ -1,6 +1,7 @@
 // import module
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -11,6 +12,7 @@ import {
     Form,
     FormControl,
 } from "react-bootstrap";
+// import DashboardUi from './page/dashboard/Dashboard';
 
 // import react icon
 import { BsCartFill } from "react-icons/bs";
@@ -22,9 +24,9 @@ import Products from "../keranjang/Products";
 import Cart from "../keranjang/Cart";
 
 // import css
-import "./Dashboard.css";
+import "./admin.css";
 
-const Dashboard = () => {
+const Admin = () => {
     // keranjang belanja
     const PAGE_PRODUCTS = "products";
     const PAGE_CART = "cart";
@@ -47,6 +49,8 @@ const Dashboard = () => {
 
     const navigate = useNavigate();
     
+    
+
     return (
         <div className="Dashboard">
             {/* navbar */}
@@ -57,7 +61,7 @@ const Dashboard = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="/profile" OnClick={()=> navigate('/profile')}>Profile</Nav.Link>
-                            <Nav.Link href="#link">Link</Nav.Link>
+                            <Nav.Link href="/about-us" OnClick={()=> navigate('/about-us')}>Link</Nav.Link>
                         </Nav>
                         <Form className="d-flex">
                             <FormControl
@@ -176,4 +180,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Admin;

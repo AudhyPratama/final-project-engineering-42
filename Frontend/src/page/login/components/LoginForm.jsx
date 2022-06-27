@@ -14,29 +14,31 @@ import './LoginForm.css';
 
 const LoginForm = () => { 
     const [state, setState] = useState({
-        email: '',
-        password: ''
+        email: "",
+        password: ""
     });
 
     const handleChange = (prop) => (event) => {
-        setState({ ...state, [prop]: event.target.state });
+        setState({ ...state, [prop]: event.target.value });
     };
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         // console.log(values);
-        await axios
+        console.log(state);
+
+        axios
             .post(
-                'http://localhost:8080/api/user/login',
+                "http://localhost:8080/api/login",
                 {
                     email: state.email,
                     password: state.password,
                 },
                 {
                     Headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                     },
                 }    
             )
@@ -48,8 +50,11 @@ const LoginForm = () => {
             })
             .catch (function (error) {
                 console.log(error);
-            })
-    }
+            });
+    };
+
+
+
 
     return (
         <div className='main'>

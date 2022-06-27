@@ -11,47 +11,31 @@ import backIcon from '../../../asset/icons/left-arrow.png';
 
 // CSS
 import './SignUpForm.css';
+import { useState } from 'react';
 
 const SignUpForm = () => {
 
-    const [inputState, setInputState] = useState({
-        username:'',
-        email: '',
-        password: ''
-    });
-
-    const handleInput = (prop) => (event) => {
-        setInputState({ ...inputState, [prop]: event.target.inputState });
-    };
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [role, setrole] = useState('');
 
     const navigate = useNavigate();
 
-    const handleSubmitRegist = async (event) => {
-        event.preventDefault();
-        // console.log(values);
-        await axios
-            .post(
-                'http://localhost:8080/api/register',
-                {
-                    username: inputState.username,
-                    email: inputState.email,
-                    password: inputState.password,
-                },
-                {
-                    Headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }    
-            )
-            .then((response) => {
-                console.log("axios", response);
-                localStorage.setItem("token", response.data.token);
-                console.log(response.data.token);
-                window.location.href = "/";
-            })
-            .catch (function (error) {
-                console.log(error);
-            })
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:8080/api/registrasi', {
+            name,
+            email,
+            password,
+            role
+        }).then(res => {
+            console.log(res);
+            navigate('/');
+        }
+        ).catch(err => {
+            console.log(err);
+        });
     }
 
     return (
@@ -82,21 +66,26 @@ const SignUpForm = () => {
                     </div>
 
                     <div className='sign-up-form-container'>
-                        <form className='sign-up-form' onSubmit={handleSubmitRegist}>
+                        <form className='sign-up-form' onSubmit={handleSubmit}>
                             <div>
-                                <h3 className='username-sign-up-text'>Username</h3>
+                                <h3 className='username-sign-up-text'>Name</h3>
                                 <img src={userIcon} alt="user icon" className='sign-up-user-icon' />
-                                <input type="text" placeholder="Username" className="signup-name" onChange={handleInput('username')}/>
+                                <input type="text" placeholder="Name" value={name} className="signup-name" onChange={(e) => setName(e.target.value)} />
                             </div>
                             <div>
                                 <h3 className='email-sign-up-text'>Email</h3>
                                 <img src={emailIcon} alt="email icon" className='sign-up-email-icon' />
-                                <input type="text" placeholder="Email" className="signup-name" onChange={handleInput('email')}/>
+                                <input type="text" placeholder="Email" value={email} className="signup-name" onChange={(e) => setEmail(e.target.value)} />
                             </div>
                             <div>
                                 <h3 className='password-sign-up-text'>Password</h3>
                                 <img src={lockIcon} alt="password icon" className='sign-up-password-icon' />
-                                <input type="password" placeholder="Password" className="signup-name" onChange={handleInput('password')}/>
+                                <input type="password" placeholder="Password" value={password} className="signup-name" onChange={(e) => setPassword(e.target.value)} />
+                            </div>
+                            <div>
+                                <h3 className='username-sign-up-text'>Role</h3>
+                                <img src={userIcon} alt="user icon" className='sign-up-user-icon' />
+                                <input type="text" placeholder="Role" value={role} className="signup-name" onChange={(e) => setrole(e.target.value)} />
                             </div>
                             <div className="sign-up-button">
                                 <button className="sign-in-btn" type="submit" >Signup</button>
