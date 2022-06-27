@@ -11,9 +11,9 @@ type CartErrorResponse struct {
 }
 
 type AddToCartResponse struct {
-	BookName     string `json:"book_name"`
-	CategoryName string `json:"category_name"`
-	Penulis      string `json:"penulis"`
+	BookName     string  `json:"book_name"`
+	CategoryName *string `json:"category_name"`
+	Penulis      string  `json:"penulis"`
 }
 
 type AddtoCartRequest struct {

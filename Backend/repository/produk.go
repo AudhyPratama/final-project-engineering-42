@@ -41,6 +41,7 @@ func (b *BookRepository) FetchBooks() ([]*Book, error) {
 	var books []*Book
 	for rows.Next() {
 		var book Book
+		
 		err := rows.Scan(
 			&book.ID,
 			&book.CategoryID,
