@@ -4,17 +4,16 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 // IMG and icons
-import userIcon from '../../../asset/icons/user.png';
+// import userIcon from '../../../asset/icons/user.png';
 import emailIcon from '../../../asset/icons/email.png';
 import lockIcon from '../../../asset/icons/padlock.png';
 import cautionMark from '../../../asset/icons/caution.png';
-// import backIcon from '../../../asset/icons/left-arrow.png';
 
 // CSS
 import './ForgotPasswordForm.css';
 
 const ForgotPasswordForm = () => {
-    const handleSubmit = 1;
+    const handleSubmit = 1; // temp var
 
     const navigate = useNavigate();
 
