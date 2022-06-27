@@ -19,18 +19,18 @@ type Profile struct {
 }
 
 type Book struct {
-	ID           int    `db:"id"`
-	CategoryID   int    `db:"category_id"`
-	CategoryName string `db:"category_name"`
-	BookName     string `db:"book_name"`
-	Penulis      string `db:"penulis"`
-	Penerbit     string `db:"penerbit"`
-	Kondisi      string `db:"kondisi"`
-	Berat        string `db:"berat"`
-	Stock        int    `db:"stock"`
-	Harga        int    `db:"harga"`
-	Deskripsi    string `db:"deskripsi"`
-	Image        string `db:"image"`
+	ID           int     `db:"id"`
+	CategoryID   int     `db:"category_id"`
+	CategoryName *string `db:"category_name"`
+	BookName     string  `db:"book_name"`
+	Penulis      string  `db:"penulis"`
+	Penerbit     string  `db:"penerbit"`
+	Kondisi      string  `db:"kondisi"`
+	Berat        string  `db:"berat"`
+	Stock        int     `db:"stock"`
+	Harga        int     `db:"harga"`
+	Deskripsi    string  `db:"deskripsi"`
+	Image        string  `db:"image"`
 }
 
 type Category struct {
@@ -39,21 +39,22 @@ type Category struct {
 }
 
 type OrderCart struct {
-	OrderID      int    `db:"order_id"`
-	BookID       int    `db:"book_id"`
-	BookName     string `db:"book_name"`
-	CategoryID   int    `db:"category_id"`
-	CategoryName string `db:"category_name"`
-	Penulis      string `db:"penulis"`
-	Penerbit     string `db:"penerbit"`
-	Quantity     int    `db:"quantity"`
-	Harga        int    `db:"harga"`
+	OrderID      int     `db:"order_id"`
+	BookID       int     `db:"book_id"`
+	BookName     string  `db:"book_name"`
+	CategoryID   int     `db:"category_id"`
+	CategoryName *string `db:"category_name"`
+	Penulis      string  `db:"penulis"`
+	Penerbit     string  `db:"penerbit"`
+	Quantity     int     `db:"quantity"`
+	Harga        int     `db:"harga"`
 }
 
 type GetBookRequest struct {
-	BookName string `json:"book_name"`
-	Penulis  string `json:"penulis"`
-	Penerbit string `json:"penerbit"`
+	BookName     string `json:"book_name"`
+	Penulis      string `json:"penulis"`
+	Penerbit     string `json:"penerbit"`
+	CategoryName string `json:"category_name"`
 }
 
 type Payment struct {

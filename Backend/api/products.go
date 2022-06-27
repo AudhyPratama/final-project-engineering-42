@@ -23,17 +23,17 @@ type AddBook struct {
 	Image      string `json:"image"`
 }
 type Book struct {
-	ID           int    `json:"id"`
-	Name         string `json:"name"`
-	Penulis      string `json:"penulis"`
-	Penerbit     string `json:"penerbit"`
-	CategoryName string `json:"category_name"`
-	Kondisi      string `json:"kondisi"`
-	Berat        string `json:"berat"`
-	Stock        int    `json:"stock"`
-	Harga        int    `json:"harga"`
-	Deskripsi    string `json:"deskripsi"`
-	Image        string `json:"image"`
+	ID           int     `json:"id"`
+	Name         string  `json:"name"`
+	Penulis      string  `json:"penulis"`
+	Penerbit     string  `json:"penerbit"`
+	CategoryName *string `json:"category_name"`
+	Kondisi      string  `json:"kondisi"`
+	Berat        string  `json:"berat"`
+	Stock        int     `json:"stock"`
+	Harga        int     `json:"harga"`
+	Deskripsi    string  `json:"deskripsi"`
+	Image        string  `json:"image"`
 }
 
 type BookListSuccessResponse struct {

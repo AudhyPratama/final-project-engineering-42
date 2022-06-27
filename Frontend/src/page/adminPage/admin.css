@@ -30,7 +30,25 @@ header {
     margin-left: 10px;
 }
 
-.keranjang{
+.row{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.col-md-12{
     /* border: 1px solid red; */
     margin-left: 10px;
+    margin-right: 10px;
+}
+
+.card{
+    /* border: 1px solid red; */
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.card-header{
+    /* border: 1px solid red; */
+    margin-left: 10px;
+    margin-right: 10px;
 }
