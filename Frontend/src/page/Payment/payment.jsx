@@ -31,7 +31,6 @@ const Payment = () => {
         navigate("/dashboard");
     };
 
-   
     const confirmOrder = () => {
         if (
             document.getElementById("name").value === "" ||
@@ -47,15 +46,11 @@ const Payment = () => {
         }
     };
     
-    
-
     return (
         <div className="Dashboard">
             {/* navbar */}
-            <Navbar bg="light" expand="lg">
-                
-                    <Navbar.Brand href="#home">Pesanan</Navbar.Brand>
-                    
+            <Navbar bg="light" expand="lg">        
+                <Navbar.Brand href="#home">Pesanan</Navbar.Brand>
             </Navbar>
 
             <header>

@@ -11,7 +11,6 @@ import backIcon from '../../../asset/icons/left-arrow.png';
 
 // CSS
 import './SignUpForm.css';
-import { useState } from 'react';
 
 const SignUpForm = () => {
 
