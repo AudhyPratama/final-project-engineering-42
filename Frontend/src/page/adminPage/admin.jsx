@@ -19,36 +19,74 @@ import { BsCartFill } from "react-icons/bs";
 import { BsFillPersonFill } from "react-icons/bs";
 import HomeCarousel from "../keranjang/HomeCarousel";
 
-// import file
-import Products from "../keranjang/Products";
-import Cart from "../keranjang/Cart";
+
+
 
 // import css
 import "./admin.css";
 
 const Admin = () => {
-    // keranjang belanja
-    const PAGE_PRODUCTS = "products";
-    const PAGE_CART = "cart";
-
-    const [cart, setCart] = useState([PAGE_CART]);
-    const [page, setPage] = useState([PAGE_PRODUCTS]);
-
-    const removeFromCart = (productToRemove) => {
-        setCart(cart.filter((product) => product !== productToRemove));
-    };
-
-    const addToCart = (product) => {
-        console.log("add cart");
-        setCart([...cart, { ...product }]);
-    };
-
-    const navigateTo = (nextPage) => {
-        setPage(nextPage);
-    };
-
     const navigate = useNavigate();
     
+    const [book_name, setBookName] = useState('');
+    const [categori_id, setCategoriId] = useState('');
+    const [penulis, setPenulis] = useState('');
+    const [penerbit, setPenerbit] = useState('');
+    const [kondisi, setKondisi] = useState('');
+    const [berat, setBerat] = useState('');
+    const [stock, setStock] = useState('');
+    const [harga, setHarga] = useState('');
+    const [deskripsi, setDeskripsi] = useState('');
+    const [image, setImage] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:8080/api/admin/product/add', {
+            categori_id,    
+            book_name,
+            penulis,
+            penerbit,
+            kondisi,
+            stock,
+            berat,
+            harga,
+            deskripsi,
+            image
+        }).then(res => {
+            console.log(res);
+            console.log(res.data);
+            alert('Berhasil Menambahkan Data');
+        }
+        ).catch(err => {
+            console.log(err);
+        });
+    };
+
+    
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:8080/api/admin/product/update', {
+            categori_id,
+            book_name,
+            penulis,
+            penerbit,
+            kondisi,
+            stock,
+            berat,
+            harga,
+            deskripsi,
+            image
+        }).then(res => {
+            console.log(res);
+            console.log(res.data);
+            alert('Berhasil Mengupdate Data');
+        }
+        ).catch(err => {
+            console.log(err);
+        });
+    };
+
+
     
 
     return (
@@ -56,38 +94,9 @@ const Admin = () => {
             {/* navbar */}
             <Navbar bg="light" expand="lg">
                 <Container>
-                    <Navbar.Brand href="/admin-page" OnClick={()=> navigate('/admin-page')}>PesBuk</Navbar.Brand>
+                    <Navbar.Brand href="#admin">Admin</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            <Nav.Link href="/profile" OnClick={()=> navigate('/profile')}>Profile</Nav.Link>
-                            <Nav.Link href="/about-us" OnClick={()=> navigate('/about-us')}>Link</Nav.Link>
-                        </Nav>
-                        <Form className="d-flex">
-                            <FormControl
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="warning">Search</Button>
-                        </Form>
-
-                        {/* tombol Keranjang */}
-                        <div class="keranjang">
-                        <button
-                            class="btn "
-                            type="submit"
-                            onClick={() => navigateTo(PAGE_CART)}
-                        >
-                            <BsCartFill />{" "}
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">
-                                ({cart.length})
-                            </span>
-                        </button>
-                        </div>
-                        {/* tombol keranjang */}
-
                         <div className="logbut">
                             <button
                                 class="btn "
@@ -108,74 +117,151 @@ const Admin = () => {
             {/* carousel */}
 
             <header>
-                <button onClick={() => navigateTo(PAGE_PRODUCTS)}> Daftar Buku </button>
-                <div>{/* {(PAGE_PRODUCTS)} */}</div>
-            </header>
-
-            {page === PAGE_PRODUCTS && <Products addToCart={addToCart} />}
-            {page === PAGE_CART && (
-                <Cart cart={cart} removeFromCart={removeFromCart} />
-            )}
-
-            {/* footer */}
-            <footer className="bg-dark page-footer font-small blue pt-4 text-white">
-                <div className="container-fluid text-center text-md-left">
+                <div className="container">
                     <div className="row">
-                        <div className="col-md-6 mt-md-0 mt-3">
-                            <h5 className="text-uppercase">PesBuk</h5>
-                            <p>
-                                PesBuk merupakan singkatan dari Pesan Buku, website ini
-                                bertujuan unutuk penjualan buku secara online dari berbagai
-                                macam kategori, yang dapat dijangkau dan diakses dimanapun
-                                unutuk mempermudah customer dalam memenuhi keinginan, atau
-                                hobbynya.
-                            </p>
-                        </div>
-
-                        <hr className="clearfix w-100 d-md-none pb-0" />
-
-                        <div className="col-md-3 mb-md-0 mb-3">
-                            <h5 className="text-uppercase">Lainnya</h5>
-                            <ul className="list-unstyled">
-                                <li>
-                                    <a href="#!">Sayrat & Ketentuan</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Kebijakan & Privasi</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Bantuan</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Hubungi Kami</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div className="col-md-3 mb-md-0 mb-3">
-                            <h5 className="text-uppercase">Tentang PesBuk</h5>
-                            <ul className="list-unstyled">
-                                <li>
-                                    <a href="#!">Kontak</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Toko</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Kerjasama</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Tentang Kami</a>
-                                </li>
-                            </ul>
+                        <div className="col-md-12">
+                            <div className="card">
+                                <div className="card-header">
+                                    <h4>Buku</h4>
+                                </div>
+                                <div className="card-body">
+                                    <div className="table-responsive">
+                                        <table className="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>CategoryID</th>
+                                                    <th>JudulBuku</th>
+                                                    <th>Penulis</th>
+                                                    <th>Penerbit</th>
+                                                    <th>Kondisi</th>
+                                                    <th>Berat</th>
+                                                    <th>Stok</th>
+                                                    <th>Harga</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Gambar</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            value={categori_id}
+                                                            // cara menyimpan category_id menjadi integer
+                                                            onChange={(e) => setCategoriId(parseInt(e.target.value))}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Judul Buku"
+                                                            value={book_name}
+                                                            onChange={(e) => setBookName(e.target.value)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Penulis"
+                                                            value={penulis}
+                                                            onChange={(e) => setPenulis(e.target.value)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Penerbit"
+                                                            value={penerbit}
+                                                            onChange={(e) => setPenerbit(e.target.value)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Kondisi"
+                                                            value={kondisi}
+                                                            onChange={(e) => setKondisi(e.target.value)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Berat"
+                                                            value={berat}
+                                                            onChange={(e) => setBerat(e.target.value)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="number"
+                                                            className="form-control"
+                                                            
+                                                            // cara menyimpan stock menjadi integer
+                                                            value={stock}
+                                                            onChange={(e) => setStock(parseInt(e.target.value))}
+                                                            //onChange={(e) => setStock(e.target.value)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Harga"
+                                                            value={harga}
+                                                            // cara menyimpan harga menjadi integer
+                                                            onChange={(e) => setHarga(parseInt(e.target.value))}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Deskripsi"
+                                                            value={deskripsi}
+                                                            onChange={(e) => setDeskripsi(e.target.value)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Gambar"
+                                                            value={image}
+                                                            onChange={(e) => setImage(e.target.value)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <button
+                                                            className="btn btn-primary"
+                                                            type="submit"
+                                                            onClick={handleSubmit}
+                                                        >
+                                                            Simpan  
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="footer-copyright text-center py-3">
-                    © 2020 Copyright:
-                    <a href="https://pesbuk.com/"> www.pesbuk.com</a>
-                </div>
-            </footer>
+              
+
+            </header>
+
+            
         </div>
     );
 };

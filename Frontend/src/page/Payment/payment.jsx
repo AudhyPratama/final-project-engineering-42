@@ -20,12 +20,9 @@ import {
 import "./payment.css";
 
 const Payment = () => {
-    // keranjang belanja
-    
 
     const navigate = useNavigate();
 
-    // cancel order
     const cancelOrder = () => {
         alert("Order Cancelled");
         navigate("/dashboard");
@@ -33,18 +30,8 @@ const Payment = () => {
 
    
     const confirmOrder = () => {
-        if (
-            document.getElementById("name").value === "" ||
-            document.getElementById("email").value === "" ||
-            document.getElementById("address").value === "" ||
-            document.getElementById("phone").value === "" ||
-            document.getElementById("payment").value === ""
-        ) {
-            alert("Please fill all the fields");
-        } else {
-            alert("Order Confirmed");
-            navigate("/dashboard");
-        }
+        alert("Order Confirmed");
+        navigate("/dashboard");
     };
     
     
@@ -54,7 +41,7 @@ const Payment = () => {
             {/* navbar */}
             <Navbar bg="light" expand="lg">
                 
-                    <Navbar.Brand href="#home">Pesanan</Navbar.Brand>
+                    <Navbar.Brand href="#home">Checkout</Navbar.Brand>
                     
             </Navbar>
 
@@ -64,7 +51,6 @@ const Payment = () => {
                         <div className="col-md-12">
                             <div className="header-content">
                                 <div className="header-content-inner">
-                                    <h1>Pesanan</h1>
                                     <h2>Pesanan anda akan segera kami proses</h2>
                                     <hr />
 
@@ -135,6 +121,7 @@ const Payment = () => {
                                     <button type="submit" className="btn btn-primary" onClick={confirmOrder}>
                                         Bayar
                                     </button>
+
                                     <button type="submit" className="btn btn-danger" onClick={cancelOrder}>
                                         Batal
                                     </button>

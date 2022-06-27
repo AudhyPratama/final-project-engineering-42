@@ -20,17 +20,39 @@ button {
 }
 
 header {
-    background-color: #61dafb;
-    padding: 70px;
-    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.logbut{
-    /* border: 1px solid red; */
-    margin-left: 10px;
+.container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.keranjang{
-    /* border: 1px solid red; */
-    margin-left: 10px;
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-right: -15px;
+    margin-left: -15px;
 }
+
+.col-md-12{
+    width: 100%;
+}
+
+.form-group{
+    margin-bottom: 10px;
+}
+
+.form-control{
+    border-radius: 20px;
+    border: 1px solid #61dafb;
+    padding: 10px;
+    font-size: 20px;
+}
+
+
